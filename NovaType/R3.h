@@ -44,7 +44,11 @@ namespace NovaType
 
         R3(const R3 &data)
         {
-            *this = data;
+            m_coord[0] = data.m_coord[0];
+
+            m_coord[1] = data.m_coord[1];
+
+            m_coord[2] = data.m_coord[2];
         }
 
         const R3 &operator =(const R3 &data)
