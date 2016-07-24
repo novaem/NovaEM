@@ -260,127 +260,42 @@ namespace NovaType
 
     };
 
-     NovaComplex operator +(const double &b,
-                            const NovaComplex &a)
-     {
-         NovaComplex result(a);
+    NovaComplex operator +(const double &b,
+                                  const NovaComplex &a);
 
-         result += b;
+    NovaComplex operator +(const NovaComplex &a,
+                                  const double &b);
 
-         return result;
-     }
+    NovaComplex operator +(const NovaComplex &a,
+                                  const NovaComplex &b);
 
-     NovaComplex operator +(const NovaComplex &a,
-                            const double &b)
-     {
-         NovaComplex result(a);
+    NovaComplex operator -(const double &b,
+                                  const NovaComplex &a);
 
-         result += b;
+    NovaComplex operator -(const NovaComplex &a,
+                                  const double &b);
 
-         return result;
-     }
+    NovaComplex operator -(const NovaComplex &a,
+                                  const NovaComplex &b);
 
-     NovaComplex operator +(const NovaComplex &a,
-                            const NovaComplex &b)
-     {
-         NovaComplex result(a);
+    NovaComplex operator *(const double &b,
+                                  const NovaComplex &a);
 
-         result += b;
+    NovaComplex operator *(const NovaComplex &a,
+                                  const double &b);
 
-         return result;
-     }
+    NovaComplex operator *(const NovaComplex &a,
+                                  const NovaComplex &b);
 
-     NovaComplex operator -(const double &b,
-                            const NovaComplex &a)
-     {
-         NovaComplex result(b - a.m_real,
-                            -a.m_imag);
+    NovaComplex operator /(const double &b,
+                                  const NovaComplex &a);
 
-         return result;
-     }
+    NovaComplex operator /(const NovaComplex &a,
+                                  const double &b);
 
-     NovaComplex operator -(const NovaComplex &a,
-                            const double &b)
-     {
-         NovaComplex result(a);
+    NovaComplex operator /(const NovaComplex &a,
+                                  const NovaComplex &b);
 
-         result -= b;
 
-         return result;
-     }
-
-     NovaComplex operator -(const NovaComplex &a,
-                            const NovaComplex &b)
-     {
-         NovaComplex result(a);
-
-         result -= b;
-
-         return result;
-     }
-
-     NovaComplex operator *(const double &b,
-                            const NovaComplex &a)
-     {
-         NovaComplex result(a);
-
-         result *= b;
-
-         return result;
-     }
-
-     NovaComplex operator *(const NovaComplex &a,
-                            const double &b)
-     {
-         NovaComplex result(a);
-
-         result *= b;
-
-         return result;
-     }
-
-     NovaComplex operator *(const NovaComplex &a,
-                            const NovaComplex &b)
-     {
-         NovaComplex result(a);
-
-         result *= b;
-
-         return result;
-     }
-
-     NovaComplex operator /(const double &b,
-                            const NovaComplex &a)
-     {
-         NovaComplex result;
-
-         a.Conjg(result);
-
-         result *= b;
-
-         result /= a.MagSq();
-
-         return result;
-     }
-
-     NovaComplex operator /(const NovaComplex &a,
-                            const double &b)
-     {
-         NovaComplex result(a);
-
-         result /= b;
-
-         return result;
-     }
-
-     NovaComplex operator /(const NovaComplex &a,
-                            const NovaComplex &b)
-     {
-         NovaComplex result(a);
-
-         result /= b;
-
-         return result;
-     }
 }
 #endif
