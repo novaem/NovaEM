@@ -12,7 +12,21 @@ beta = 2 * pi / lambda;
 
 % Distance between elements:
 
-d = 0.45;
+d = 0.7559 * lambda;
+
+%d = 0.45 * lambda;
+
+% Microstrip wavelength:
+
+lambdaMicrostrip = lambda / sqrt(1.75);
+
+% Microstrip wave number:
+
+betaMicrostrip = 2 * pi / lambdaMicrostrip;
+
+% Phase difference of excitation of adjacent elements:
+
+alpha = d * betaMicrostrip;
 
 % Angle:
 
@@ -32,11 +46,20 @@ AF = zeros(length(theta), 1);
 
 for m = 1 : length(theta)
 
-  for n = 1 : N
+  AF(m) = A((N - 1) / 2 + 1) * sin(theta(m));
+  
+  for n = 1 : (N - 1) / 2
   
     phi = beta * d * cos(theta(m));
     
-    AF(m) = AF(m) + A(n) * exp(1j * (n - 1) * phi) * sin(theta(m));
+    % Right element:
+    
+    AF(m) = AF(m) + A(n) * exp(1j * n * (phi + alpha)) * sin(theta(m));
+    
+    % Left element:
+    
+    AF(m) = AF(m) + A(n) * exp(1j * n * (-phi + alpha)) * sin(theta(m));
+    
   end
 
 end
@@ -61,11 +84,19 @@ AF = zeros(length(theta), 1);
 
 for m = 1 : length(theta)
 
-  for n = 1 : N
+  AF(m) = A((N - 1) / 2 + 1) * sin(theta(m));
+  
+  for n = 1 : (N - 1) / 2
   
     phi = beta * d * cos(theta(m));
     
-    AF(m) = AF(m) + A(n) * exp(1j * (n - 1) * phi) * sin(theta(m));
+    % Right element:
+    
+    AF(m) = AF(m) + A(n) * exp(1j * n * (phi + alpha)) * sin(theta(m));
+    
+    % Left element:
+    
+    AF(m) = AF(m) + A(n) * exp(1j * n * (-phi + alpha)) * sin(theta(m));
   end
 
 end
@@ -80,3 +111,5 @@ figure(1);
 
 plot(theta / pi * 180, AF1, 'b-', ...
      theta / pi * 180, AF2, 'r-');
+ 
+grid on;
