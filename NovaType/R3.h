@@ -163,16 +163,18 @@ namespace NovaType
             m_coord[2] = -m_coord[2];
         }
 
-        double Dot(const R3 &data)
+        double Dot(const R3 &data) const
         {
             double result = m_coord[0] * data.m_coord[0];
 
             result += m_coord[1] * data.m_coord[1];
 
             result += m_coord[2] * data.m_coord[2];
+
+            return result;
         }
 
-        void Cross(const R3 &data, R3 &result)
+        void Cross(const R3 &data, R3 &result) const
         {
             result.m_coord[0] = m_coord[1] * data.m_coord[2] -
                                 m_coord[2] * data.m_coord[1];
@@ -184,7 +186,7 @@ namespace NovaType
                                 m_coord[1] * data.m_coord[0];
         }
 
-        R3 Cross(const R3 &data)
+        R3 Cross(const R3 &data) const
         {
             return R3(m_coord[1] * data.m_coord[2] -
                       m_coord[2] * data.m_coord[1],

@@ -120,4 +120,6 @@ int TestR3()
     std::cout << "Vector calculation test is done."
               << std::endl << std::endl;
 
+    return 0;
+
 }
