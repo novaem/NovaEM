@@ -105,4 +105,4 @@ namespace NovaMesh
     };
 }
 
-#endif // ELEMENT_H
+#endif // __ELEMENT__
