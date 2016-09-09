@@ -1,5 +1,5 @@
-#ifndef __ELEMENT__
-#define __ELEMENT__
+#ifndef ELEMENT_H
+#define ELEMENT_H
 
 #include <cstddef>
 #include "R3.h"
@@ -99,10 +99,14 @@ namespace NovaMesh
 
         // Given the global coordinate, compute the local coordiante:
 
-        virtual void ComputeLocalCoord(const NovaType::R3 &gc,
-                                       double lc[]) = 0;
+        virtual bool ComputeLocalCoord(const NovaType::R3 &gc,
+                                       bool &isInside,
+                                       double lc[])
+        {
+            return false;
+        }
 
     };
 }
 
-#endif // __ELEMENT__
+#endif // ELEMENT_H

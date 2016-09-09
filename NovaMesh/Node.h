@@ -1,5 +1,5 @@
-#ifndef __NODE__
-#define __NODE__
+#ifndef NODE_H
+#define NODE_H
 
 #include <cstddef>
 #include "R3.h"
@@ -46,4 +46,4 @@ namespace NovaMesh
     };
 }
 
-#endif // __NODE__
+#endif // NODE_H
