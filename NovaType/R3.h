@@ -1,5 +1,7 @@
-#ifndef __R3__
-#define __R3__
+#ifndef R3_H
+#define R3_H
+
+#pragma once
 
 #include <cmath>
 
@@ -198,6 +200,30 @@ namespace NovaType
                       m_coord[1] * data.m_coord[0]);
         }
 
+        double ComputeDistance(const R3 &data) const
+        {
+            double distance(0.0);
+
+            double d(0.0);
+
+            d = m_coord[0] - data.m_coord[0];
+            d *= d;
+
+            distance += d;
+
+            d = m_coord[1] - data.m_coord[1];
+            d *= d;
+
+            distance += d;
+
+            d = m_coord[2] - data.m_coord[2];
+            d *= d;
+
+            distance += d;
+
+            return std::sqrt(distance);
+        }
+
         friend const R3 operator +(const R3 &a, const R3 &b);
         friend const R3 operator -(const R3 &a, const R3 &b);
         friend const R3 operator *(const R3 &data, const double &a);
@@ -212,6 +238,6 @@ namespace NovaType
     const R3 operator *(const double &a, const R3 &data);
     const R3 operator /(const R3 &data, const double &a);
 
-};
+}
 
-#endif
+#endif // R3_H

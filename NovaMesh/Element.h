@@ -1,6 +1,8 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
+#pragma once
+
 #include <cstddef>
 #include "R3.h"
 
@@ -82,28 +84,39 @@ namespace NovaMesh
 
         // Get the dimension of the element:
 
-        virtual unsigned GetDimension() = 0;
+        virtual unsigned GetDimension() const = 0;
 
         // Get the type of the element:
 
-        virtual ElementType GetType() = 0;
+        virtual ElementType GetType() const = 0;
+
+        // Get the number of nodes:
+
+        virtual unsigned GetNumNodes() const = 0;
 
         // Given the local coordiante, compute the Jacobian:
 
-        virtual double ComputeJacobian(const double lc[]) = 0;
+        virtual double ComputeJacobian(const double lc[]) const = 0;
 
         // Given the local coordiante, compute the global coordiante:
 
         virtual void ComputeGlobalCoord(const double lc[],
-                                        NovaType::R3 &gc) = 0;
+                                        NovaType::R3 &gc) const = 0;
 
         // Given the global coordinate, compute the local coordiante:
 
         virtual bool ComputeLocalCoord(const NovaType::R3 &gc,
                                        bool &isInside,
-                                       double lc[])
+                                       double lc[]) const
         {
             return false;
+        }
+
+        // Compute the distance between the centers of two elements:
+
+        virtual double ComputeDistance(const Element &element) const
+        {
+            return m_center.ComputeDistance(element.GetCenter());
         }
 
     };

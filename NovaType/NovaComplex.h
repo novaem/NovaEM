@@ -1,5 +1,7 @@
-#ifndef __NOVA_COMPLEX__
-#define __NOVA_COMPLEX__
+#ifndef NOVA_COMPLEX_H
+#define NOVA_COMPLEX_H
+
+#pragma once
 
 #include <cmath>
 
@@ -298,4 +300,4 @@ namespace NovaType
 
 
 }
-#endif
+#endif // NOVA_COMPLEX_H
