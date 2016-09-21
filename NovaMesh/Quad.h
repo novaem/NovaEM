@@ -1,5 +1,5 @@
-#ifndef TRIANGLE_H
-#define TRIANGLE_H
+#ifndef QUAD_H
+#define QUAD_H
 
 #pragma once
 
@@ -7,7 +7,8 @@
 
 namespace NovaMesh
 {
-    class Triangle : public Patch2D
+
+    class Quad : public Patch2D
     {
     public:
 
@@ -15,17 +16,11 @@ namespace NovaMesh
 
     protected:
 
-        NovaType::R3 m_unitaryVec[NovaDef::DIM_2D];
-
-        double m_jacobian;
-
     public:
-        // Default constructor:
 
-        Triangle();
+        Quad();
 
-        virtual ~Triangle()
-        {}
+        virtual ~Quad();
 
         // Initialize triangle mesh element:
 
@@ -36,10 +31,8 @@ namespace NovaMesh
 
         virtual PatchType GetType()
         {
-            return NovaMesh::TRI;
+            return NovaMesh::QUAD;
         }
-
-        // Get the number of nodes on this type of patch:
 
         virtual unsigned GetNumNodes()
         {
@@ -66,6 +59,6 @@ namespace NovaMesh
                                        bool &isInside,
                                        double lc[]);
     };
-}
 
-#endif // TRIANGLE_H
+}
+#endif // QUAD_H

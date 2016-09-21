@@ -9,12 +9,54 @@ NovaMesh::Triangle::Triangle():
     m_nodes = new const NovaType::R3 *[NUM_NODES];
 }
 
+// Initialize triangle mesh element:
+
+void NovaMesh::Triangle::
+Initialize(const unsigned long id,
+           const NovaType::R3 **nodes)
+{
+    m_ID = id;
+
+    for(unsigned i(0); i < NUM_NODES; ++i)
+
+        m_nodes[i] = nodes[i];
+
+    // r1 - r0:
+
+    m_unitaryVec[0].Initialize(*nodes[1]);
+
+    m_unitaryVec[0].Subtract(*nodes[0]);
+
+    // r2 - r0:
+
+    m_unitaryVec[1].Initialize(*nodes[2]);
+
+    m_unitaryVec[1].Subtract(*nodes[0]);
+
+    // Jacobian = |(r1 - r0) x (r2 - r0)|:
+
+    NovaType::R3 n;
+
+    m_unitaryVec[0].Cross(m_unitaryVec[1], n);
+
+    m_jacobian = n.Mag();
+
+}
+
 // Given the local coordiante, compute the Jacobian:
 
 double NovaMesh::Triangle::
 ComputeJacobian(const double lc[])
 {
     return m_jacobian;
+}
+
+void NovaMesh::Triangle::
+ComputeUnitaryVectors(const double lc[], NovaType::R3 unitary[]) const
+{
+    unitary[0].Initialize(m_unitaryVec[0]);
+
+    unitary[1].Initialize(m_unitaryVec[1]);
 }
 
 // Given the local coordiante, compute the global coordiante:

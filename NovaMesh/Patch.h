@@ -96,6 +96,11 @@ namespace NovaMesh
 
         virtual double ComputeJacobian(const double lc[]) const = 0;
 
+        // Given the local coordinate, compute the unitary vectors:
+
+        virtual void ComputeUnitaryVectors(const double lc[],
+                                           NovaType::R3 unitary[]) const = 0;
+
         // Given the local coordiante, compute the global coordiante:
 
         virtual void ComputeGlobalCoord(const double lc[],
