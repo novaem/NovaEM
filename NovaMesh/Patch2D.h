@@ -1,28 +1,29 @@
-#ifndef ELEMENT2D_H
-#define ELEMENT2D_H
+#ifndef PATCH2D_H
+#define PATCH2D_H
 
 #pragma once
 
-#include "Element.h"
+#include "Patch.h"
+#include "NovaDef.h"
 
 namespace NovaMesh
 {
-    class Element2D : public Element
+    class Patch2D : public Patch
     {
     public:
 
-        Element2D() :
-            Element()
+        Patch2D() :
+            Patch()
         {}
 
-        virtual ~Element2D()
+        virtual ~Patch2D()
         {}
 
         // Get the dimension of the element:
 
         virtual unsigned GetDimension()
         {
-            return 2;
+            return NovaDef::DIM_2D;
         }
 
         virtual void ComputeNormalDir(const double lc[],

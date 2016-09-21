@@ -1,5 +1,5 @@
-#ifndef ELEMENT_H
-#define ELEMENT_H
+#ifndef PATCH_H
+#define PATCH_H
 
 #pragma once
 
@@ -8,11 +8,9 @@
 
 namespace NovaMesh
 {
-    class Node;
+    enum PatchType{LINE, TRI, QUAD, TET, HEX, PRISM};
 
-    enum ElementType{LINE, TRI, QUAD, TET, HEX, PRISM};
-
-    class Element
+    class Patch
     {
     protected:
 
@@ -22,7 +20,7 @@ namespace NovaMesh
 
         // Array holds the pointers to the nodes of the element:
 
-        const Node **m_nodes;
+        const NovaType::R3 **m_nodes;
 
         // Center of the element:
 
@@ -32,14 +30,14 @@ namespace NovaMesh
 
         // Default constructor:
 
-        Element():
+        Patch():
             m_ID(0),
             m_nodes(NULL)
         {}
 
         // Destructor:
 
-        virtual ~Element()
+        virtual ~Patch()
         {
             if(m_nodes != NULL)
             {
@@ -58,14 +56,14 @@ namespace NovaMesh
 
         // Get the array holds the pointers to the nodes of the element:
 
-        const Node **GetNodes() const
+        const NovaType::R3 **GetNodes() const
         {
             return m_nodes;
         }
 
         // Obtain the node specified by the node ID:
 
-        const Node *GetNode(unsigned nodeID) const
+        const NovaType::R3 *GetNode(unsigned nodeID) const
         {
             return m_nodes[nodeID];
         }
@@ -80,7 +78,7 @@ namespace NovaMesh
         // Initialize the element:
 
         virtual void Initialize(const unsigned long id,
-                                const Node **nodes) = 0;
+                                const NovaType::R3 **nodes) = 0;
 
         // Get the dimension of the element:
 
@@ -88,7 +86,7 @@ namespace NovaMesh
 
         // Get the type of the element:
 
-        virtual ElementType GetType() const = 0;
+        virtual PatchType GetType() = 0;
 
         // Get the number of nodes:
 

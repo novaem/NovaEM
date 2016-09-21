@@ -118,6 +118,33 @@ namespace NovaType
             return *this;
         }
 
+        void Initialize()
+        {
+            m_coord[0] = 0.0;
+
+            m_coord[1] = 0.0;
+
+            m_coord[2] = 0.0;
+        }
+
+        void Initialize(const R3 &data)
+        {
+            m_coord[0] = data.m_coord[0];
+
+            m_coord[1] = data.m_coord[1];
+
+            m_coord[2] = data.m_coord[2];
+        }
+
+        void Initialize(const double &a, const R3 &data)
+        {
+            m_coord[0] = a * data.m_coord[0];
+
+            m_coord[1] = a * data.m_coord[1];
+
+            m_coord[2] = a * data.m_coord[2];
+        }
+
         double &GetCoord(const unsigned i)
         {
             return m_coord[i];
@@ -164,6 +191,43 @@ namespace NovaType
 
             m_coord[2] = -m_coord[2];
         }
+
+        void Add(const R3 &data)
+        {
+            m_coord[0] += data.m_coord[0];
+
+            m_coord[1] += data.m_coord[1];
+
+            m_coord[2] += data.m_coord[2];
+        }
+
+        void Add(const double &a, const R3 &data)
+        {
+            m_coord[0] += a * data.m_coord[0];
+
+            m_coord[1] += a * data.m_coord[1];
+
+            m_coord[2] += a * data.m_coord[2];
+        }
+
+        void Subtract(const R3 &data)
+        {
+            m_coord[0] -= data.m_coord[0];
+
+            m_coord[1] -= data.m_coord[1];
+
+            m_coord[2] -= data.m_coord[2];
+        }
+
+        void Subtract(const double &a, const R3 &data)
+        {
+            m_coord[0] -= a * data.m_coord[0];
+
+            m_coord[1] -= a * data.m_coord[1];
+
+            m_coord[2] -= a * data.m_coord[2];
+        }
+
 
         double Dot(const R3 &data) const
         {

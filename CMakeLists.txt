@@ -10,15 +10,24 @@ SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS} -O2 -g")
 
 SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2")
 
-include_directories(SYSTEM "NovaType")
+add_subdirectory(NovaDef)
+
+include_directories(SYSTEM "NovaDef")
 
 add_subdirectory(NovaType)
 
+include_directories(SYSTEM "NovaType")
+
 add_subdirectory(NovaMesh)
+
+include_directories(SYSTEM "NovaMesh")
 
 add_subdirectory(UnitTest)
 
 add_executable(NovaEM main.cpp)
 
-target_link_libraries(NovaEM NovaType NovaMesh)
+target_link_libraries(NovaEM 
+                      NovaDef
+                      NovaType 
+                      NovaMesh)
 

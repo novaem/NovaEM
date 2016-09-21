@@ -1,11 +1,13 @@
 set(SOURCES Node.cpp
-            Element.cpp
-            Element2D.cpp
-            Element3D.cpp)
+            Patch.cpp
+            Patch2D.cpp
+            Element3D.cpp
+            Triangle.cpp)
 
 set(HEADERS Node.h
-            Element.h
-            Element2D.h
-            Element3D.h)
+            Patch.h
+            Patch2D.h
+            Element3D.h
+            Triangle.h)
 
 add_library(NovaMesh ${SOURCES} ${HEADERS})
