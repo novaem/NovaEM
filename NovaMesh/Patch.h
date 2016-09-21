@@ -112,9 +112,9 @@ namespace NovaMesh
 
         // Compute the distance between the centers of two elements:
 
-        virtual double ComputeDistance(const Element &element) const
+        virtual double ComputeDistance(const Patch &other) const
         {
-            return m_center.ComputeDistance(element.GetCenter());
+            return m_center.ComputeDistance(other.GetCenter());
         }
 
     };
