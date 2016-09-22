@@ -21,13 +21,13 @@ namespace NovaMesh
 
         // Get the dimension of the element:
 
-        virtual unsigned GetDimension()
+        virtual unsigned GetDimension() const
         {
             return NovaDef::DIM_2D;
         }
 
         virtual void ComputeNormalDir(const double lc[],
-                                      NovaType::R3 &nHat) = 0;
+                                      NovaType::R3 &nHat) const= 0;
 
     };
 }

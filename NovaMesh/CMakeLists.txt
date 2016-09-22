@@ -13,3 +13,5 @@ set(HEADERS Node.h
             Quad.h)
 
 add_library(NovaMesh ${SOURCES} ${HEADERS})
+
+target_link_libraries(NovaMesh NovaType NovaDef)

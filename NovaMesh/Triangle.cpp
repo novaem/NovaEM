@@ -35,18 +35,18 @@ Initialize(const unsigned long id,
 
     // Jacobian = |(r1 - r0) x (r2 - r0)|:
 
-    NovaType::R3 n;
+    m_unitaryVec[0].Cross(m_unitaryVec[1], m_normalDir);
 
-    m_unitaryVec[0].Cross(m_unitaryVec[1], n);
+    m_jacobian = m_normalDir.Mag();
 
-    m_jacobian = n.Mag();
+    m_normalDir.Normalize();
 
 }
 
 // Given the local coordiante, compute the Jacobian:
 
 double NovaMesh::Triangle::
-ComputeJacobian(const double lc[])
+ComputeJacobian(const double lc[]) const
 {
     return m_jacobian;
 }
@@ -63,7 +63,7 @@ ComputeUnitaryVectors(const double lc[], NovaType::R3 unitary[]) const
 
 void NovaMesh::Triangle::
 ComputeGlobalCoord(const double lc[],
-                   NovaType::R3 &gc)
+                   NovaType::R3 &gc) const
 {
     const double &L1 = lc[0];
 
@@ -84,7 +84,13 @@ ComputeGlobalCoord(const double lc[],
 bool NovaMesh::Triangle::
 ComputeLocalCoord(const NovaType::R3 &gc,
                   bool &isInside,
-                  double lc[])
+                  double lc[]) const
 {
     return false;
+}
+
+void NovaMesh::Triangle::
+ComputeNormalDir(const double lc[], NovaType::R3 &nHat) const
+{
+    nHat.Initialize(m_normalDir);
 }

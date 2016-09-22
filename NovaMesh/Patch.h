@@ -86,7 +86,7 @@ namespace NovaMesh
 
         // Get the type of the element:
 
-        virtual PatchType GetType() = 0;
+        virtual PatchType GetType() const = 0;
 
         // Get the number of nodes:
 

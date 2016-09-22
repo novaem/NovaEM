@@ -20,28 +20,29 @@ namespace NovaMesh
 
         Quad();
 
-        virtual ~Quad();
-
-        // Initialize triangle mesh element:
-
-        virtual void Initialize(const unsigned long id,
-                                const NovaType::R3 **nodes);
+        virtual ~Quad()
+        {}
 
         // Get the type of the element:
 
-        virtual PatchType GetType()
+        virtual PatchType GetType() const
         {
             return NovaMesh::QUAD;
         }
 
-        virtual unsigned GetNumNodes()
+        virtual unsigned GetNumNodes() const
         {
             return NUM_NODES;
         }
 
+        // Initialize quad mesh element:
+
+        virtual void Initialize(const unsigned long id,
+                                const NovaType::R3 **nodes);
+
         // Given the local coordiante, compute the Jacobian:
 
-        virtual double ComputeJacobian(const double lc[]);
+        virtual double ComputeJacobian(const double lc[]) const;
 
         // Given the local coordinate, compute the unitary vectors:
 
@@ -51,13 +52,16 @@ namespace NovaMesh
         // Given the local coordiante, compute the global coordiante:
 
         virtual void ComputeGlobalCoord(const double lc[],
-                                        NovaType::R3 &gc);
+                                        NovaType::R3 &gc) const;
 
         // Given the global coordinate, compute the local coordiante:
 
         virtual bool ComputeLocalCoord(const NovaType::R3 &gc,
                                        bool &isInside,
-                                       double lc[]);
+                                       double lc[]) const;
+
+        virtual void ComputeNormalDir(const double lc[],
+                                      NovaType::R3 &nHat) const;
     };
 
 }

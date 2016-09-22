@@ -1,10 +1,12 @@
 set(SOURCES UnitTest.cpp
             TestR3.cpp
-            TestComplex.cpp)
+            TestComplex.cpp
+            TestPatch.cpp)
 
 set(HEADERS TestR3.h
-            TestComplex.h)
+            TestComplex.h
+            TestPatch.h)
 
 add_executable(UnitTest ${SOURCES} ${HEADERS})
 
-target_link_libraries(UnitTest NovaType)
+target_link_libraries(UnitTest NovaType NovaMesh NovaDef)
