@@ -19,6 +19,17 @@ Initialize(const unsigned long id,
     for(unsigned i(0); i < NUM_NODES; ++i)
 
         m_nodes[i] = nodes[i];
+
+    double a = 0.25;
+
+    m_center.Set(a, *nodes[0]);
+
+    m_center.Add(a, *nodes[1]);
+
+    m_center.Add(a, *nodes[2]);
+
+    m_center.Add(a, *nodes[3]);
+
 }
 
 // Given the local coordiante, compute the Jacobian:
@@ -38,22 +49,22 @@ ComputeJacobian(const double lc[]) const
 
     NovaType::R3 t;
 
-    t.Initialize(*m_nodes[1]);
+    t.Set(*m_nodes[1]);
     t.Subtract(*m_nodes[0]);
 
-    dRdU.Initialize(L3, t);
+    dRdU.Set(L3, t);
 
-    t.Initialize(*m_nodes[2]);
+    t.Set(*m_nodes[2]);
     t.Subtract(*m_nodes[3]);
 
     dRdU.Add(L2, t);
 
-    t.Initialize(*m_nodes[3]);
+    t.Set(*m_nodes[3]);
     t.Subtract(*m_nodes[0]);
 
-    dRdV.Initialize(L0, t);
+    dRdV.Set(L0, t);
 
-    t.Initialize(*m_nodes[2]);
+    t.Set(*m_nodes[2]);
     t.Subtract(*m_nodes[1]);
 
     dRdV.Add(L1, t);
@@ -81,22 +92,22 @@ ComputeUnitaryVectors(const double lc[],
 
     NovaType::R3 t;
 
-    t.Initialize(*m_nodes[1]);
+    t.Set(*m_nodes[1]);
     t.Subtract(*m_nodes[0]);
 
-    dRdU.Initialize(L3, t);
+    dRdU.Set(L3, t);
 
-    t.Initialize(*m_nodes[2]);
+    t.Set(*m_nodes[2]);
     t.Subtract(*m_nodes[3]);
 
     dRdU.Add(L2, t);
 
-    t.Initialize(*m_nodes[3]);
+    t.Set(*m_nodes[3]);
     t.Subtract(*m_nodes[0]);
 
-    dRdV.Initialize(L0, t);
+    dRdV.Set(L0, t);
 
-    t.Initialize(*m_nodes[2]);
+    t.Set(*m_nodes[2]);
     t.Subtract(*m_nodes[1]);
 
     dRdV.Add(L1, t);
@@ -115,7 +126,7 @@ ComputeGlobalCoord(const double lc[],
     double L0 = 1.0 - L1;
     double L3 = 1.0 - L2;
 
-    gc.Initialize(L0*L3, *m_nodes[0]);
+    gc.Set(L0*L3, *m_nodes[0]);
 
     gc.Add(L1*L3, *m_nodes[1]);
 
@@ -150,22 +161,22 @@ ComputeNormalDir(const double lc[], NovaType::R3 &nHat) const
 
     NovaType::R3 &t = nHat;
 
-    t.Initialize(*m_nodes[1]);
+    t.Set(*m_nodes[1]);
     t.Subtract(*m_nodes[0]);
 
-    dRdU.Initialize(L3, t);
+    dRdU.Set(L3, t);
 
-    t.Initialize(*m_nodes[2]);
+    t.Set(*m_nodes[2]);
     t.Subtract(*m_nodes[3]);
 
     dRdU.Add(L2, t);
 
-    t.Initialize(*m_nodes[3]);
+    t.Set(*m_nodes[3]);
     t.Subtract(*m_nodes[0]);
 
-    dRdV.Initialize(L0, t);
+    dRdV.Set(L0, t);
 
-    t.Initialize(*m_nodes[2]);
+    t.Set(*m_nodes[2]);
     t.Subtract(*m_nodes[1]);
 
     dRdV.Add(L1, t);

@@ -23,13 +23,13 @@ Initialize(const unsigned long id,
 
     // r1 - r0:
 
-    m_unitaryVec[0].Initialize(*nodes[1]);
+    m_unitaryVec[0].Set(*nodes[1]);
 
     m_unitaryVec[0].Subtract(*nodes[0]);
 
     // r2 - r0:
 
-    m_unitaryVec[1].Initialize(*nodes[2]);
+    m_unitaryVec[1].Set(*nodes[2]);
 
     m_unitaryVec[1].Subtract(*nodes[0]);
 
@@ -40,6 +40,14 @@ Initialize(const unsigned long id,
     m_jacobian = m_normalDir.Mag();
 
     m_normalDir.Normalize();
+
+    double a = 1.0 / 3.0;
+
+    m_center.Set(a, *nodes[0]);
+
+    m_center.Add(a, *nodes[1]);
+
+    m_center.Add(a, *nodes[2]);
 
 }
 
@@ -54,9 +62,9 @@ ComputeJacobian(const double lc[]) const
 void NovaMesh::Triangle::
 ComputeUnitaryVectors(const double lc[], NovaType::R3 unitary[]) const
 {
-    unitary[0].Initialize(m_unitaryVec[0]);
+    unitary[0].Set(m_unitaryVec[0]);
 
-    unitary[1].Initialize(m_unitaryVec[1]);
+    unitary[1].Set(m_unitaryVec[1]);
 }
 
 // Given the local coordiante, compute the global coordiante:
@@ -71,7 +79,7 @@ ComputeGlobalCoord(const double lc[],
 
     double L0 = 1.0 - L1 - L2;
 
-    gc.Initialize(L0, *m_nodes[0]);
+    gc.Set(L0, *m_nodes[0]);
 
     gc.Add(L1, *m_nodes[1]);
 
@@ -92,5 +100,5 @@ ComputeLocalCoord(const NovaType::R3 &gc,
 void NovaMesh::Triangle::
 ComputeNormalDir(const double lc[], NovaType::R3 &nHat) const
 {
-    nHat.Initialize(m_normalDir);
+    nHat.Set(m_normalDir);
 }

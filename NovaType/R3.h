@@ -127,7 +127,25 @@ namespace NovaType
             m_coord[2] = 0.0;
         }
 
-        void Initialize(const R3 &data)
+        void Set(const double &x, const double &y, const double &z)
+        {
+            m_coord[0] = x;
+
+            m_coord[1] = y;
+
+            m_coord[2] = z;
+        }
+
+        void Set(const double *coord)
+        {
+            m_coord[0] = coord[0];
+
+            m_coord[1] = coord[1];
+
+            m_coord[2] = coord[2];
+        }
+
+        void Set(const R3 &data)
         {
             m_coord[0] = data.m_coord[0];
 
@@ -136,7 +154,7 @@ namespace NovaType
             m_coord[2] = data.m_coord[2];
         }
 
-        void Initialize(const double &a, const R3 &data)
+        void Set(const double &a, const R3 &data)
         {
             m_coord[0] = a * data.m_coord[0];
 
