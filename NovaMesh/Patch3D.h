@@ -19,7 +19,7 @@ namespace NovaMesh
 
         // Get the dimension of the element:
 
-        virtual unsigned GetDimension()
+        virtual unsigned GetDimension() const
         {
             return NovaDef::DIM_3D;
         }
