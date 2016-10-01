@@ -1,5 +1,6 @@
 #include "TestPatch.h"
 #include "Triangle.h"
+#include "Tet.h"
 #include "Quad.h"
 #include "Hex.h"
 #include <iostream>
@@ -37,18 +38,23 @@ int TestPatch()
 
     double lc[] = {1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0};
 
-    NovaType::R3 t1, t2;
+    NovaType::R3 t1;
 
     NovaType::R3 unit[3];
+
+    std::cout << "Testing Triangle ..."
+              << std::endl << std::endl;
 
     NovaMesh::Triangle triangle;
 
     triangle.Initialize(0, (const NovaType::R3 **) (av));
 
-    triangle.ComputeGlobalCoord(lc, t1);
+    std::cout << "Type: "
+              << triangle.GetType()
+              << std::endl
+              << std::endl;
 
-    std::cout << "Testing Triangle ..."
-              << std::endl << std::endl;
+    triangle.ComputeGlobalCoord(lc, t1);
 
     std::cout << "Global coordinate: "
               << t1[0] << "    "
@@ -71,21 +77,19 @@ int TestPatch()
 
     triangle.ComputeUnitaryVectors(lc, unit);
 
-    t1.Set(unit[0]);
+    unsigned long n = triangle.GetDimension();
 
-    std::cout << "Unitary vector 1: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
+    for(unsigned i(0); i < n; ++i)
+    {
+        t1.Set(unit[i]);
 
-    t1.Set(unit[1]);
+        std::cout << "Unitary vector " << i << ": "
+                  << t1[0] << "    "
+                  << t1[1] << "    "
+                  << t1[2]
+                  << std::endl << std::endl;
+    }
 
-    std::cout << "Unitary vector 2: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
 
     t1.Set(triangle.GetCenter());
 
@@ -95,49 +99,122 @@ int TestPatch()
               << t1[2]
               << std::endl << std::endl;
 
-    unsigned long n = triangle.GetID();
+    n = triangle.GetID();
 
     std::cout << "ID: " << n << std::endl << std::endl;
-
-    t1.Set(*triangle.GetNode(0));
-
-    std::cout << "Node 0: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
-
-    t1.Set(*triangle.GetNode(1));
-
-    std::cout << "Node 1: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
-
-    t1.Set(*triangle.GetNode(2));
-
-    std::cout << "Node 2: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
 
     n = triangle.GetNumNodes();
 
     std::cout << "# of nodes: " << n << std::endl << std::endl;
 
-    std::cout << "Type: "
-              << triangle.GetType()
-              << std::endl
-              << std::endl;
+    for(unsigned i(0); i < n; ++i)
+    {
+
+        t1.Set(*triangle.GetNode(i));
+
+        std::cout << "Node " << i << "  : "
+                  << t1[0] << "    "
+                  << t1[1] << "    "
+                  << t1[2]
+                  << std::endl << std::endl;
+    }
 
     std::cout << "Triangle test is done!"
               << std::endl << std::endl;
 
+    v[0].Set(0.0, 0.0, 0.0);
+    v[1].Set(1.0, 0.0, 0.0);
+    v[2].Set(0.0, 1.0, 0.0);
+    v[3].Set(0.0, 0.0, 1.0);
+
+    std::cout << "Testing Tet ..."
+              << std::endl << std::endl;
+
+    NovaMesh::Tet tet;
+
+    tet.Initialize(2, (const NovaType::R3 **) (av));
+
+    std::cout << "Type: "
+              << tet.GetType()
+              << std::endl
+              << std::endl;
+
+    tet.ComputeGlobalCoord(lc, t1);
+
+    std::cout << "Global coordinate: "
+              << t1[0] << "    "
+              << t1[1] << "    "
+              << t1[2]
+              << std::endl << std::endl;
+
+    a = tet.ComputeJacobian(lc);
+
+    std::cout << "Jacobian: " << a
+              << std::endl << std::endl;
+
+    tet.ComputeUnitaryVectors(lc, unit);
+
+    n = tet.GetDimension();
+
+    for(unsigned i(0); i < n; ++i)
+    {
+        t1.Set(unit[i]);
+
+        std::cout << "Unitary vector " << i << ": "
+                  << t1[0] << "    "
+                  << t1[1] << "    "
+                  << t1[2]
+                  << std::endl << std::endl;
+    }
+
+    t1.Set(tet.GetCenter());
+
+    std::cout << "Center: "
+              << t1[0] << "    "
+              << t1[1] << "    "
+              << t1[2]
+              << std::endl << std::endl;
+
+    n = tet.GetID();
+
+    std::cout << "ID: " << n << std::endl << std::endl;
+
+    n = tet.GetNumNodes();
+
+    std::cout << "# of nodes: " << n << std::endl << std::endl;
+
+    for(unsigned i(0); i < n; ++i)
+    {
+
+        t1.Set(*tet.GetNode(i));
+
+        std::cout << "Node " << i << "  : "
+                  << t1[0] << "    "
+                  << t1[1] << "    "
+                  << t1[2]
+                  << std::endl << std::endl;
+    }
+
+    std::cout << "Tet test is done!"
+              << std::endl << std::endl;
+
+    v[0].Set(0.0, 0.0, 0.0);
+    v[1].Set(1.0, 0.0, 0.0);
+    v[2].Set(1.0, 1.0, 0.0);
+    v[3].Set(0.0, 1.0, 0.0);
+    v[4].Set(0.0, 0.0, 1.0);
+    v[5].Set(1.0, 0.0, 1.0);
+    v[6].Set(1.0, 1.0, 1.0);
+    v[7].Set(0.0, 1.0, 1.0);
+
     NovaMesh::Quad quad;
 
-    quad.Initialize(1, (const NovaType::R3 **) (av));
+    quad.Initialize(3, (const NovaType::R3 **) (av));
+
+    std::cout << "Type: "
+              << quad.GetType()
+              << std::endl
+              << std::endl;
 
     quad.ComputeGlobalCoord(lc, t1);
 
@@ -165,21 +242,18 @@ int TestPatch()
 
     quad.ComputeUnitaryVectors(lc, unit);
 
-    t1.Set(unit[0]);
+    n = quad.GetDimension();
 
-    std::cout << "Unitary vector 1: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
+    for(unsigned i(0); i < n; ++i)
+    {
+        t1.Set(unit[i]);
 
-    t1.Set(unit[1]);
-
-    std::cout << "Unitary vector 2: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
+        std::cout << "Unitary vector " << i << ": "
+                  << t1[0] << "    "
+                  << t1[1] << "    "
+                  << t1[2]
+                  << std::endl << std::endl;
+    }
 
     t1.Set(quad.GetCenter());
 
@@ -193,48 +267,23 @@ int TestPatch()
 
     std::cout << "ID: " << n << std::endl << std::endl;
 
-    t1.Set(*quad.GetNode(0));
-
-    std::cout << "Node 0: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
-
-    t1.Set(*quad.GetNode(1));
-
-    std::cout << "Node 1: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
-
-    t1.Set(*quad.GetNode(2));
-
-    std::cout << "Node 2: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
-
-    t1.Set(*quad.GetNode(3));
-
-    std::cout << "Node 3: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
-
     n = quad.GetNumNodes();
 
     std::cout << "# of nodes: " << n << std::endl << std::endl;
 
-    std::cout << "Type: "
-              << quad.GetType()
-              << std::endl
-              << std::endl;
+    for(unsigned i(0); i < n; ++i)
+    {
 
-    std::cout << "Distance between two patches is: "
+        t1.Set(*quad.GetNode(i));
+
+        std::cout << "Node " << i << "  : "
+                  << t1[0] << "    "
+                  << t1[1] << "    "
+                  << t1[2]
+                  << std::endl << std::endl;
+    }
+
+    std::cout << "Distance between triangle and quad is: "
               << quad.ComputeDistance(triangle)
               << std::endl << std::endl;
 
@@ -243,12 +292,17 @@ int TestPatch()
 
     NovaMesh::Hex hex;
 
-    hex.Initialize(1, (const NovaType::R3 **) (av));
-
-    hex.ComputeGlobalCoord(lc, t1);
+    hex.Initialize(4, (const NovaType::R3 **) (av));
 
     std::cout << "Testing Hex ..."
               << std::endl << std::endl;
+
+    std::cout << "Type: "
+              << hex.GetType()
+              << std::endl
+              << std::endl;
+
+    hex.ComputeGlobalCoord(lc, t1);
 
     std::cout << "Global coordinate: "
               << t1[0] << "    "
@@ -263,29 +317,18 @@ int TestPatch()
 
     hex.ComputeUnitaryVectors(lc, unit);
 
-    t1.Set(unit[0]);
+    n = tet.GetDimension();
 
-    std::cout << "Unitary vector 1: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
+    for(unsigned i(0); i < n; ++i)
+    {
+        t1.Set(unit[i]);
 
-    t1.Set(unit[1]);
-
-    std::cout << "Unitary vector 2: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
-
-    t1.Set(unit[2]);
-
-    std::cout << "Unitary vector 3: "
-              << t1[0] << "    "
-              << t1[1] << "    "
-              << t1[2]
-              << std::endl << std::endl;
+        std::cout << "Unitary vector " << i << ": "
+                  << t1[0] << "    "
+                  << t1[1] << "    "
+                  << t1[2]
+                  << std::endl << std::endl;
+    }
 
     t1.Set(hex.GetCenter());
 

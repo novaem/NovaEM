@@ -3,6 +3,7 @@ set(SOURCES Node.cpp
             Patch2D.cpp
             Patch3D.cpp
             Triangle.cpp
+            Tet.cpp
             Quad.cpp
             Hex.cpp)
 
@@ -11,6 +12,7 @@ set(HEADERS Node.h
             Patch2D.h
             Patch3D.h
             Triangle.h
+            Tet.h
             Quad.h
             Hex.h)
 
