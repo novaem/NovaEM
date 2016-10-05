@@ -22,6 +22,10 @@ add_subdirectory(NovaMesh)
 
 include_directories(SYSTEM "NovaMesh")
 
+add_subdirectory(NovaBasis)
+
+include_directories(SYSTEM "NovaBasis")
+
 add_subdirectory(UnitTest)
 
 add_executable(NovaEM main.cpp)
