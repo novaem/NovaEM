@@ -1,10 +1,14 @@
 set(SOURCES Basis.cpp
             DivBasisTri.cpp
-            DivBasisQuad.cpp)
+            DivBasisQuad.cpp
+            DivBasisTet.cpp
+            DivBasisHex.cpp)
 
 set(HEADERS Basis.h
             DivBasisTri.h
-            DivBasisQuad.h)
+            DivBasisQuad.h
+            DivBasisTet.h
+            DivBasisHex.h)
 
 add_library(NovaBasis ${SOURCES} ${HEADERS})
 
