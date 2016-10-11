@@ -1,6 +1,7 @@
 #include "TestR3.h"
 #include "TestComplex.h"
 #include "TestPatch.h"
+#include "TestBasis.h"
 
 int main()
 {
@@ -9,6 +10,8 @@ int main()
     TestComplex();
 
     TestPatch();
+
+    TestBasis();
 
     return 0;
 }

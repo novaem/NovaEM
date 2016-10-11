@@ -10,6 +10,7 @@ namespace NovaBasis
 
     class DivBasisHex : public DivConformingBasis
     {
+    public:
         // Default constructor:
 
         DivBasisHex() : DivConformingBasis()

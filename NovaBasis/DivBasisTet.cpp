@@ -18,28 +18,28 @@ ComputeBn(const unsigned index,
     case 0:
         value[0] = u;
         value[1] = v;
-        value[3] = w;
+        value[2] = w;
 
         break;
 
     case 1:
         value[0] = u - 1.0;
         value[1] = v;
-        value[3] = w;
+        value[2] = w;
 
         break;
 
     case 2:
         value[0] = u;
         value[1] = v - 1.0;
-        value[3] = w;
+        value[2] = w;
 
         break;
 
     case 3:
         value[0] = u;
         value[1] = v;
-        value[3] = w - 1.0;
+        value[2] = w - 1.0;
 
     default:
         break;
