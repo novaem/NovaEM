@@ -26,12 +26,21 @@ add_subdirectory(NovaBasis)
 
 include_directories(SYSTEM "NovaBasis")
 
+add_subdirectory(NovaTools)
+
+include_directories(SYSTEM "NovaTools")
+
 add_subdirectory(UnitTest)
 
 add_executable(NovaEM main.cpp)
 
+include_directories(SYSTEM "$HOME/tools/include")
+
+link_directories(SYSTEM "$HOME/tools/lib")
+
 target_link_libraries(NovaEM 
                       NovaDef
                       NovaType 
-                      NovaMesh)
+                      NovaMesh
+                      NovaBasis)
 

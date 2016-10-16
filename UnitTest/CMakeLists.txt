@@ -11,4 +11,8 @@ set(HEADERS TestR3.h
 
 add_executable(UnitTest ${SOURCES} ${HEADERS})
 
-target_link_libraries(UnitTest NovaType NovaMesh NovaDef NovaBasis)
+target_link_libraries(UnitTest
+                      NovaType
+                      NovaMesh
+                      NovaDef
+                      NovaBasis)
