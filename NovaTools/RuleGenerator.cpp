@@ -47,7 +47,7 @@ void ConvertTriangleRule(const char *filename)
 
     output.open("triangleAbscissas.txt");
 
-    output.precision(15);
+    output.precision(OUTPUT_PRECISION);
 
     unsigned long totalNumSample(0);
 
@@ -62,7 +62,7 @@ void ConvertTriangleRule(const char *filename)
         output << "// The abscissas of order "
                << order
                << " rule ("
-               << numSamples << " points):"
+               << numSamples << " point(s)):"
                << std::endl << std::endl;
 
         for(unsigned long i(0); i < numSamples; ++i)
@@ -73,7 +73,8 @@ void ConvertTriangleRule(const char *filename)
 
             u = (x + (one - v)) * half;
 
-            output << u << ",    "
+            output << std::scientific
+                   << u << ",    "
                    << v << ","
                    << std::endl;
 
@@ -93,7 +94,7 @@ void ConvertTriangleRule(const char *filename)
 
     output.open("triangleWeights.txt");
 
-    output.precision(15);
+    output.precision(OUTPUT_PRECISION);
 
     for(unsigned n(0); n < 50; ++n)
     {
@@ -102,7 +103,7 @@ void ConvertTriangleRule(const char *filename)
         output << "// The weights of order "
                << order
                << " rule ("
-               << numSamples << " points):"
+               << numSamples << " point(s)):"
                << std::endl << std::endl;
 
         for(unsigned long i(0); i < numSamples; ++i)
@@ -111,7 +112,8 @@ void ConvertTriangleRule(const char *filename)
 
             weight = w / jacobian;
 
-            output << weight << ","
+            output << std::scientific
+                   << weight << ","
                    << std::endl;
 
 
@@ -167,7 +169,7 @@ void ConvertTetRule(const char *filename)
 
     output.open("tetAbscissas.txt");
 
-    output.precision(15);
+    output.precision(OUTPUT_PRECISION);
 
     unsigned long totalNumSample(0);
 
@@ -182,7 +184,7 @@ void ConvertTetRule(const char *filename)
         output << "// The abscissas of order "
                << order
                << " rule ("
-               << numSamples << " points):"
+               << numSamples << " point(s)):"
                << std::endl << std::endl;
 
         for(unsigned long i(0); i < numSamples; ++i)
@@ -195,7 +197,8 @@ void ConvertTetRule(const char *filename)
 
             p = (x + (one - r - q)) * half;
 
-            output << p << ",    "
+            output << std::scientific
+                   << p << ",    "
                    << q << ",    "
                    << r << ","
                    << std::endl;
@@ -216,7 +219,7 @@ void ConvertTetRule(const char *filename)
 
     output.open("tetWeights.txt");
 
-    output.precision(15);
+    output.precision(OUTPUT_PRECISION);
 
     for(unsigned n(0); n < 15; ++n)
     {
@@ -225,7 +228,7 @@ void ConvertTetRule(const char *filename)
         output << "// The weights of order "
                << order
                << " rule ("
-               << numSamples << " points):"
+               << numSamples << " point(s)):"
                << std::endl << std::endl;
 
         for(unsigned long i(0); i < numSamples; ++i)
@@ -234,7 +237,8 @@ void ConvertTetRule(const char *filename)
 
             weight = w / jacobian;
 
-            output << weight << ","
+            output << std::scientific
+                   << weight << ","
                    << std::endl;
 
 
