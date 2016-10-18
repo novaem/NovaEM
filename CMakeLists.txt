@@ -26,6 +26,10 @@ add_subdirectory(NovaBasis)
 
 include_directories(SYSTEM "NovaBasis")
 
+add_subdirectory(NovaIntegrator)
+
+include_directories(SYSTEM "NovaIntegrator")
+
 add_subdirectory(NovaTools)
 
 include_directories(SYSTEM "NovaTools")

@@ -2,6 +2,7 @@
 #include "TestComplex.h"
 #include "TestPatch.h"
 #include "TestBasis.h"
+#include "TestIntegrator.h"
 
 int main()
 {
@@ -12,6 +13,8 @@ int main()
     TestPatch();
 
     TestBasis();
+
+    TestIntegrator();
 
     return 0;
 }
