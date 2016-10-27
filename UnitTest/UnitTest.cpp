@@ -14,7 +14,11 @@ int main()
 
     TestBasis();
 
-    TestIntegrator();
+    IntTester intTester;
+
+    intTester.TestRule();
+
+    intTester.TestIntegrator();
 
     return 0;
 }

@@ -1,6 +1,35 @@
 #ifndef TESTINTEGRATOR_H
 #define TESTINTEGRATOR_H
 
-int TestIntegrator();
+#pragma once
+
+#include "FixedPntIntegrator1D.h"
+
+class IntTester
+{
+private:
+
+    typedef NovaIntegrator::IntegrandTemplate<IntTester> TestIntegrand;
+
+protected:
+
+    TestIntegrand *m_integrandObj;
+
+public:
+
+    IntTester();
+
+    virtual ~IntTester();
+
+    void Integrand1D(const double localCoord[],
+                     double *integrandVector,
+                     const unsigned vectorLength,
+                     const unsigned dataType);
+
+    int TestRule();
+
+    int TestIntegrator();
+
+};
 
 #endif // TESTINTEGRATOR_H
