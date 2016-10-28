@@ -111,9 +111,17 @@ int IntTester::TestIntegrator()
 {
     double result[128];
 
+    double bounds[128];
+
+    bounds[0] = 0.5;
+
+    bounds[1] = 0.0;
+
     m_integrandObj->ResetFunction(&IntTester::Integrand1D);
 
     NovaIntegrator::FixedPntIntegrator1D integrator1d;
+
+    integrator1d.SetBounds(2, bounds);
 
     integrator1d.SetOrder(5);
 
@@ -124,13 +132,24 @@ int IntTester::TestIntegrator()
 
     std::cout.precision(15);
 
-    std::cout << "The integral of (x^5 + 2*x^3) over (0, 1) is: "
+    std::cout << "The integral of (x^5 + 2*x^3) over (0.5, 0) is: "
               << result[0]
               << std::endl;
+
+    bounds[0] = 0.0;
+    bounds[1] = 0.0;
+
+    bounds[2] = 0.5;
+    bounds[3] = 0.0;
+
+    bounds[4] = 0.0;
+    bounds[5] = 0.7;
 
     m_integrandObj->ResetFunction(&IntTester::IntegrandTri);
 
     NovaIntegrator::FixedPntIntegrator2D_Tri integratorTri;
+
+    integratorTri.SetBounds(6, bounds);
 
     integratorTri.SetOrder(5);
 
