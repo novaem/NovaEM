@@ -36,6 +36,22 @@ Integrand1D(const double localCoord[],
     return;
 }
 
+void IntTester::
+IntegrandTri(const double localCoord[],
+             double *integrandVector,
+             const unsigned vectorLength,
+             const unsigned dataType)
+{
+    const double &L1 = localCoord[0];
+
+    const double &L2 = localCoord[1];
+
+    integrandVector[0] = L1 * L1 * L1 * L2 * L2 +
+                         2.0 * L2 * L2 * L1;
+
+    return;
+}
+
 int IntTester::TestRule()
 {
     IntegrationRule *rule(NULL);
@@ -93,22 +109,39 @@ int IntTester::TestRule()
 
 int IntTester::TestIntegrator()
 {
-    m_integrandObj->ResetFunction(&IntTester::Integrand1D);
-
-    NovaIntegrator::FixedPntIntegrator1D integrator;
-
     double result[128];
 
-    integrator.SetOrder(5);
+    m_integrandObj->ResetFunction(&IntTester::Integrand1D);
 
-    integrator.Integrate(m_integrandObj,
-                         result,
-                         1,
-                         NovaDef::REAL_DATA_TYPE);
+    NovaIntegrator::FixedPntIntegrator1D integrator1d;
+
+    integrator1d.SetOrder(5);
+
+    integrator1d.Integrate(m_integrandObj,
+                           result,
+                           1,
+                           NovaDef::REAL_DATA_TYPE);
 
     std::cout.precision(15);
 
     std::cout << "The integral of (x^5 + 2*x^3) over (0, 1) is: "
+              << result[0]
+              << std::endl;
+
+    m_integrandObj->ResetFunction(&IntTester::IntegrandTri);
+
+    NovaIntegrator::FixedPntIntegrator2D_Tri integratorTri;
+
+    integratorTri.SetOrder(5);
+
+    integratorTri.Integrate(m_integrandObj,
+                           result,
+                           1,
+                           NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of (u^3 * v^2 + 2 * u * v^2) over unit triangle is: "
               << result[0]
               << std::endl;
 

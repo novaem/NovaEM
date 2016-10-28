@@ -4,6 +4,7 @@
 #pragma once
 
 #include "FixedPntIntegrator1D.h"
+#include "FixedPntIntegrator2D_Tri.h"
 
 class IntTester
 {
@@ -25,6 +26,11 @@ public:
                      double *integrandVector,
                      const unsigned vectorLength,
                      const unsigned dataType);
+
+    void IntegrandTri(const double localCoord[],
+                      double *integrandVector,
+                      const unsigned vectorLength,
+                      const unsigned dataType);
 
     int TestRule();
 
