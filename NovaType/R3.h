@@ -173,6 +173,13 @@ namespace NovaType
             return m_coord;
         }
 
+        void GetCoord(double coord[])
+        {
+            coord[0] = m_coord[0];
+            coord[1] = m_coord[1];
+            coord[2] = m_coord[2];
+        }
+
         const double &GetCoord(const unsigned i) const
         {
             return m_coord[i];

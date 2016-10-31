@@ -52,6 +52,25 @@ IntegrandTri(const double localCoord[],
     return;
 }
 
+void IntTester::
+IntegrandTet(const double localCoord[],
+             double *integrandVector,
+             const unsigned vectorLength,
+             const unsigned dataType)
+{
+    const double &L1 = localCoord[0];
+
+    const double &L2 = localCoord[1];
+
+    const double &L3 = localCoord[2];
+
+    integrandVector[0] = L1 * L1 * L2 * L3 +
+                         2.0 * L1 * L2 * L2 * L3 +
+                         3.0 * L1 * L2 * L3 * L3 ;
+
+    return;
+}
+
 int IntTester::TestRule()
 {
     IntegrationRule *rule(NULL);
@@ -160,7 +179,43 @@ int IntTester::TestIntegrator()
 
     std::cout.precision(15);
 
-    std::cout << "The integral of (u^3 * v^2 + 2 * u * v^2) over unit triangle is: "
+    std::cout << "The integral of (u^3 * v^2 + 2 * u * v^2) over a triangle is: "
+              << result[0]
+              << std::endl;
+
+    bounds[0] = 0.0;
+    bounds[1] = 0.0;
+    bounds[2] = 0.;
+
+    bounds[3] = 1.1;
+    bounds[4] = 0.0;
+    bounds[5] = 0.0;
+
+    bounds[6] = 0.0;
+    bounds[7] = 1.2;
+    bounds[8] = 0.0;
+
+    bounds[9] = 0.0;
+    bounds[10] = 0.0;
+    bounds[11] = 1.3;
+
+
+    m_integrandObj->ResetFunction(&IntTester::IntegrandTet);
+
+    NovaIntegrator::FixedPntIntegrator3D_Tet integratorTet;
+
+    integratorTet.SetBounds(12, bounds);
+
+    integratorTet.SetOrder(4);
+
+    integratorTet.Integrate(m_integrandObj,
+                           result,
+                           1,
+                           NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of (u^2 * v * w + 2 * u * v^2 * w + 3 * u * v * w^2) over a tet is: "
               << result[0]
               << std::endl;
 

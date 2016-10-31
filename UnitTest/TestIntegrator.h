@@ -5,6 +5,7 @@
 
 #include "FixedPntIntegrator1D.h"
 #include "FixedPntIntegrator2D_Tri.h"
+#include "FixedPntIntegrator3D_Tet.h"
 
 class IntTester
 {
@@ -28,6 +29,11 @@ public:
                      const unsigned dataType);
 
     void IntegrandTri(const double localCoord[],
+                      double *integrandVector,
+                      const unsigned vectorLength,
+                      const unsigned dataType);
+
+    void IntegrandTet(const double localCoord[],
                       double *integrandVector,
                       const unsigned vectorLength,
                       const unsigned dataType);
