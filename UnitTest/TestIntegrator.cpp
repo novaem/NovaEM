@@ -185,6 +185,37 @@ int IntTester::TestIntegrator()
 
     bounds[0] = 0.0;
     bounds[1] = 0.0;
+
+    bounds[2] = 0.5;
+    bounds[3] = 0.0;
+
+    bounds[4] = 0.0;
+    bounds[5] = 0.7;
+
+    bounds[6] = 0.0;
+    bounds[7] = 0.0;
+
+    m_integrandObj->ResetFunction(&IntTester::IntegrandTri);
+
+    NovaIntegrator::FixedPntIntegrator2D_Quad integratorQuad;
+
+    integratorQuad.SetBounds(8, bounds);
+
+    integratorQuad.SetOrder(6);
+
+    integratorQuad.Integrate(m_integrandObj,
+                             result,
+                             1,
+                             NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of (u^3 * v^2 + 2 * u * v^2) over a triangle is: "
+              << result[0]
+              << std::endl;
+
+    bounds[0] = 0.0;
+    bounds[1] = 0.0;
     bounds[2] = 0.;
 
     bounds[3] = 1.1;

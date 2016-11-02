@@ -5,6 +5,7 @@
 
 #include "FixedPntIntegrator1D.h"
 #include "FixedPntIntegrator2D_Tri.h"
+#include "FixedPntIntegrator2D_Quad.h"
 #include "FixedPntIntegrator3D_Tet.h"
 
 class IntTester

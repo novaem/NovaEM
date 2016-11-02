@@ -6,6 +6,7 @@ set(SOURCES IntegrationRule.cpp
             FixedPointIntegrator.cpp
             FixedPntIntegrator1D.cpp
             FixedPntIntegrator2D_Tri.cpp
+            FixedPntIntegrator2D_Quad.cpp
             FixedPntIntegrator3D_Tet.cpp)
 
 set(HEADERS IntegrationRule.h
@@ -17,6 +18,7 @@ set(HEADERS IntegrationRule.h
             FixedPointIntegrator.h
             FixedPntIntegrator1D.h
             FixedPntIntegrator2D_Tri.h
+            FixedPntIntegrator2D_Quad.h
             FixedPntIntegrator3D_Tet.h)
 
 add_library(NovaIntegrator ${SOURCES} ${HEADERS})
