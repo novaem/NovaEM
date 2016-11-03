@@ -7,6 +7,7 @@
 #include "FixedPntIntegrator2D_Tri.h"
 #include "FixedPntIntegrator2D_Quad.h"
 #include "FixedPntIntegrator3D_Tet.h"
+#include "FixedPntIntegrator3D_Hex.h"
 
 class IntTester
 {

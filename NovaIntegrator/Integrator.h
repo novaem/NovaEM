@@ -72,8 +72,8 @@ namespace NovaIntegrator
             CleanUp();
         }
 
-        void SetBounds(const unsigned length,
-                       const double *bounds)
+        virtual void SetBounds(const unsigned length,
+                               const double *bounds)
         {
             for(unsigned i(0); i < length; ++i)
                 m_bounds[i] = bounds[i];

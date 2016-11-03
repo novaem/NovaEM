@@ -31,6 +31,8 @@ FixedPntIntegrator3D_Tet(const unsigned order)
     m_bounds[9] = 0.0;
     m_bounds[10] = 0.0;
     m_bounds[11] = 1.0;
+
+    UpdateVertex();
 }
 
 unsigned NovaIntegrator::FixedPntIntegrator3D_Tet::

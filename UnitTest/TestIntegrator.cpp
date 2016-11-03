@@ -250,6 +250,58 @@ int IntTester::TestIntegrator()
               << result[0]
               << std::endl;
 
+    bounds[0] = 0.0;
+    bounds[1] = 0.0;
+    bounds[2] = 0.;
+
+    bounds[3] = 1.1;
+    bounds[4] = 0.0;
+    bounds[5] = 0.0;
+
+    bounds[6] = 0.0;
+    bounds[7] = 1.2;
+    bounds[8] = 0.0;
+
+    bounds[9] = 0.0;
+    bounds[10] = 0.0;
+    bounds[11] = 0.0;
+
+    bounds[12] = 0.0;
+    bounds[13] = 0.0;
+    bounds[14] = 0.0;
+
+    bounds[15] = 0.0;
+    bounds[16] = 0.0;
+    bounds[17] = 1.3;
+
+    bounds[18] = 0.0;
+    bounds[19] = 0.0;
+    bounds[20] = 1.3;
+
+    bounds[21] = 0.0;
+    bounds[22] = 0.0;
+    bounds[23] = 0.0;
+
+
+    m_integrandObj->ResetFunction(&IntTester::IntegrandTet);
+
+    NovaIntegrator::FixedPntIntegrator3D_Hex integratorHex;
+
+    integratorHex.SetBounds(24, bounds);
+
+    integratorHex.SetOrder(6);
+
+    integratorHex.Integrate(m_integrandObj,
+                           result,
+                           1,
+                           NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of (u^2 * v * w + 2 * u * v^2 * w + 3 * u * v * w^2) over a tet is: "
+              << result[0]
+              << std::endl;
+
     return 0;
 
 }

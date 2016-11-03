@@ -5,6 +5,7 @@
 
 #include "FixedPointIntegrator.h"
 #include "GaussRule3D_Tet.h"
+#include "R3.h"
 
 namespace NovaIntegrator
 {
@@ -19,21 +20,28 @@ namespace NovaIntegrator
 
     protected:
 
+        NovaType::R3 m_nodes[4];
+
+        void UpdateVertex()
+        {
+            for(unsigned i(0); i < NUM_VERTEX; ++i)
+
+                m_nodes[i].Set(m_bounds + i * DIM);
+        }
+
         virtual double ComputeJacobian(const double lc[])
         {
-            NovaType::R3 r0(m_bounds);
+            NovaType::R3 r1r0(m_nodes[1]);
 
-            NovaType::R3 r1r0(m_bounds + NovaDef::DIM_3D);
+            r1r0.Subtract(m_nodes[0]);
 
-            r1r0.Subtract(r0);
+            NovaType::R3 r2r0(m_nodes[2]);
 
-            NovaType::R3 r2r0(m_bounds + NovaDef::DIM_3D * 2);
+            r2r0.Subtract(m_nodes[0]);
 
-            r2r0.Subtract(r0);
+            NovaType::R3 r3r0(m_nodes[3]);
 
-            NovaType::R3 r3r0(m_bounds + NovaDef::DIM_3D * 3);
-
-            r3r0.Subtract(r0);
+            r3r0.Subtract(m_nodes[0]);
 
             NovaType::R3 t;
 
@@ -53,23 +61,17 @@ namespace NovaIntegrator
 
             double L0 = 1.0 - L1 - L2 - L3;
 
-            NovaType::R3 r0(m_bounds);
+            NovaType::R3 r(m_nodes[0]);
 
-            NovaType::R3 r1(m_bounds + NovaDef::DIM_3D);
+            r *= L0;
 
-            NovaType::R3 r2(m_bounds + NovaDef::DIM_3D * 2);
+            r.Add(L1, m_nodes[1]);
 
-            NovaType::R3 r3(m_bounds + NovaDef::DIM_3D * 3);
+            r.Add(L2, m_nodes[2]);
 
-            r0 *= L0;
+            r.Add(L3, m_nodes[3]);
 
-            r0.Add(L1, r1);
-
-            r0.Add(L2, r2);
-
-            r0.Add(L3, r3);
-
-            r0.GetCoord(localCoord);
+            r.GetCoord(localCoord);
         }
 
     public:
@@ -103,6 +105,14 @@ namespace NovaIntegrator
         virtual bool IsAdaptiveIntegrator() const
         {
             return false;
+        }
+
+        virtual void SetBounds(const unsigned length,
+                               const double *bounds)
+        {
+            Integrator::SetBounds(length, bounds);
+
+            UpdateVertex();
         }
 
         virtual unsigned Integrate(Integrand *integrand,

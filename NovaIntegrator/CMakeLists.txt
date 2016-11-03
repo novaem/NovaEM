@@ -7,7 +7,8 @@ set(SOURCES IntegrationRule.cpp
             FixedPntIntegrator1D.cpp
             FixedPntIntegrator2D_Tri.cpp
             FixedPntIntegrator2D_Quad.cpp
-            FixedPntIntegrator3D_Tet.cpp)
+            FixedPntIntegrator3D_Tet.cpp
+            FixedPntIntegrator3D_Hex.cpp)
 
 set(HEADERS IntegrationRule.h
             GaussRule1D.h
@@ -19,7 +20,8 @@ set(HEADERS IntegrationRule.h
             FixedPntIntegrator1D.h
             FixedPntIntegrator2D_Tri.h
             FixedPntIntegrator2D_Quad.h
-            FixedPntIntegrator3D_Tet.h)
+            FixedPntIntegrator3D_Tet.h
+            FixedPntIntegrator3D_Hex.h)
 
 add_library(NovaIntegrator ${SOURCES} ${HEADERS})
 
