@@ -13,7 +13,6 @@ AdaptiveIntegrator():
     m_absoluteErr(false),
     m_errorType(MEAN_ERROR),
     m_numDomains(0),
-    m_domainBoundsLength(0),
     m_subdomainBoundsLength(0),
     m_subdomainBounds1(NULL),
     m_subdomainBounds2(NULL),
@@ -24,43 +23,34 @@ AdaptiveIntegrator():
 void NovaIntegrator::AdaptiveIntegrator::
 AllocateDomainBounds(const unsigned length)
 {
-    if(length > m_domainBoundsLength)
-    {
-        delete[] m_bounds;
-
-        m_bounds = NULL;
-    }
-
-    m_bounds = new double[length];
-
-    m_domainBoundsLength = length;
+    InitializeBounds(length);
 }
 
 void NovaIntegrator::AdaptiveIntegrator::
 AllocateSubdomainBounds(const unsigned length)
 {
-    if(length > m_subdomainBoundsLength)
+    if(length < m_subdomainBoundsLength)
+        return;
+
+    if(m_subdomainBounds1 != NULL)
     {
-        if(m_subdomainBounds1 != NULL)
-        {
-            delete[] m_subdomainBounds1;
+        delete[] m_subdomainBounds1;
 
-            m_subdomainBounds1 = NULL;
-        }
-
-        if(m_subdomainBounds2 != NULL)
-        {
-            delete[] m_subdomainBounds2;
-
-            m_subdomainBounds2 = NULL;
-        }
-
-        m_subdomainBounds1 = new double[length];
-
-        m_subdomainBounds2 = new double[length];
-
-        m_subdomainBoundsLength = length;
+        m_subdomainBounds1 = NULL;
     }
+
+    if(m_subdomainBounds2 != NULL)
+    {
+        delete[] m_subdomainBounds2;
+
+        m_subdomainBounds2 = NULL;
+    }
+
+    m_subdomainBounds1 = new double[length];
+
+    m_subdomainBounds2 = new double[length];
+
+    m_subdomainBoundsLength = length;
 }
 
 void NovaIntegrator::AdaptiveIntegrator::

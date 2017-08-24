@@ -18,6 +18,8 @@ namespace NovaIntegrator
 
         unsigned m_order;
 
+        unsigned m_boundsLength;
+
         double *m_bounds;
 
         unsigned m_workspaceLength;
@@ -28,6 +30,8 @@ namespace NovaIntegrator
 
         void CleanUp()
         {
+            m_boundsLength = 0;
+
             if(m_bounds != NULL)
             {
                 delete[] m_bounds;
@@ -35,14 +39,34 @@ namespace NovaIntegrator
                 m_bounds = NULL;
             }
 
+            m_workspaceLength = 0;
+
+            if(m_workspace != NULL)
+            {
+                delete[] m_workspace;
+
+                m_workspace = NULL;
+            }
+
             m_numFuncEval = 0;
         }
 
-        void InitializeBounds(const unsigned length)
+        void InitializeBoundSpace(const unsigned length)
         {
-            CleanUp();
+            if(length < m_boundsLength)
+
+                return;
+
+            if(m_bounds != NULL)
+            {
+                delete[] m_bounds;
+
+                m_bounds = NULL;
+            }
 
             m_bounds = new double[length];
+
+            m_boundsLength = length;
         }
 
         void InitializeWorkspace(const unsigned length)
@@ -76,6 +100,7 @@ namespace NovaIntegrator
                                const double *bounds)
         {
             for(unsigned i(0); i < length; ++i)
+
                 m_bounds[i] = bounds[i];
         }
 

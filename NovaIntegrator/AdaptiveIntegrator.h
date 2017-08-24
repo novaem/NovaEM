@@ -22,19 +22,32 @@ namespace NovaIntegrator
 
     protected:
 
+        // Error tolerance:
+
         double m_errTol;
+
+        // The lower limit of the magnitude of the integrand.
+        // When the integrand is smaller than this limit,
+        // absolute error, instead of relative error, will
+        // be used to check convergence:
 
         double m_absErrorLimit;
 
+        // The estimated error of current iteration:
+
         double m_errorEstimate;
+
+        // Flag tells if absolute error is used:
 
         bool m_absoluteErr;
 
+        // The way in which the error is computed:
+
         ErrorType m_errorType;
 
-        unsigned m_numDomains;
+        // The initial number of domains to be integrated:
 
-        unsigned m_domainBoundsLength;
+        unsigned m_numDomains;
 
         // Length of subdomain bounds array:
 
@@ -48,13 +61,24 @@ namespace NovaIntegrator
 
         IntegrationRule **m_rule;
 
-        virtual double ComputeJacobian(const double lc[]) = 0;
-
-        virtual void ComputeLocalCoordinate(const double lc[],
-                                            double localCoord[]) = 0;
-
         void CleanUp()
         {
+            m_subdomainBoundsLength = 0;
+
+            if(m_subdomainBounds1 != NULL)
+            {
+                delete[] m_subdomainBounds1;
+
+                m_subdomainBounds1 = NULL;
+            }
+
+            if(m_subdomainBounds2 != NULL)
+            {
+                delete[] m_subdomainBounds2;
+
+                m_subdomainBounds2 = NULL;
+            }
+
             if(m_rule != NULL)
             {
                 delete[] m_rule;
@@ -65,7 +89,12 @@ namespace NovaIntegrator
 
         void InitializeRule(const unsigned numRule)
         {
-            CleanUp();
+            if(m_rule != NULL)
+            {
+                delete[] m_rule;
+
+                m_rule = NULL;
+            }
 
             m_rule = new IntegrationRule *[numRule];
         }
@@ -115,6 +144,16 @@ namespace NovaIntegrator
         void SetErrTol(const double &errTol)
         {
             m_errTol = errTol;
+        }
+
+        virtual bool IsSingularIntegrator()
+        {
+            return false;
+        }
+
+        virtual bool IsAdaptiveIntegrator() const
+        {
+            return true;
         }
 
         // Set number of domains:
