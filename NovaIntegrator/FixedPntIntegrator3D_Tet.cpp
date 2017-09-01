@@ -14,7 +14,7 @@ FixedPntIntegrator3D_Tet(const unsigned order)
 
     SetOrder(order);
 
-    InitializeBounds(NUM_VERTEX * DIM);
+    InitializeBoundSpace(NUM_VERTEX * DIM);
 
     m_bounds[0] = 0.0;
     m_bounds[1] = 0.0;

@@ -20,11 +20,15 @@ namespace NovaIntegrator
 
         const static double DEFAULT_ABS_LIMIT;
 
+        const static unsigned MAX_NUM_SUBDOMAIN;
+
     protected:
 
         // Error tolerance:
 
         double m_errTol;
+
+        double m_absErrTol;
 
         // The lower limit of the magnitude of the integrand.
         // When the integrand is smaller than this limit,
@@ -72,12 +76,9 @@ namespace NovaIntegrator
                 m_subdomainBounds1 = NULL;
             }
 
-            if(m_subdomainBounds2 != NULL)
-            {
-                delete[] m_subdomainBounds2;
+            if(m_fixedPntIntegrator != NULL)
 
-                m_subdomainBounds2 = NULL;
-            }
+                delete m_fixedPntIntegrator;
 
             if(m_rule != NULL)
             {
@@ -122,6 +123,10 @@ namespace NovaIntegrator
                              const double *result2,
                              bool &isAbsErr);
 
+        virtual unsigned GetBoundRecLength() const = 0;
+
+        virtual unsigned GetSplitDomainNum() const = 0;
+
         virtual void SplitDomain(double *oldDomain,
                                  double *newDomain,
                                  unsigned splitDirection = 0) = 0;
@@ -146,7 +151,7 @@ namespace NovaIntegrator
             m_errTol = errTol;
         }
 
-        virtual bool IsSingularIntegrator()
+        virtual bool IsSingularIntegrator() const
         {
             return false;
         }
@@ -156,9 +161,15 @@ namespace NovaIntegrator
             return true;
         }
 
-        // Set number of domains:
+        virtual unsigned Integrate(Integrand *integrand,
+                                   double *integrandVector,
+                                   const unsigned vectorLength,
+                                   const unsigned dataType);
 
-        virtual void SetNumDomain(const unsigned numDomains) = 0;
+//        // Set number of domains:
+
+//        virtual void SetNumDomain(const unsigned numDomains) = 0;
+
     };
 }
 

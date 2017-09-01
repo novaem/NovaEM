@@ -14,7 +14,7 @@ FixedPntIntegrator1D(const unsigned order)
 
     SetOrder(order);
 
-    InitializeBounds(NUM_VERTEX * DIM);
+    InitializeBoundSpace(NUM_VERTEX * DIM);
 
     m_bounds[0] = 0.0;
 

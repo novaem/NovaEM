@@ -30,8 +30,8 @@ Integrand1D(const double localCoord[],
 {
     const double &L1 = localCoord[0];
 
-    integrandVector[0] = L1 * L1 * L1 * L1 * L1 +
-                         2.0 * L1 * L1 * L1;
+    integrandVector[0] = L1 * L1 * L1 * L1 * L1 * L1 * L1 * L1 * L1 * L1+
+                         2.0 * L1 * L1 * L1 * L1 * L1;
 
     return;
 }
@@ -142,7 +142,7 @@ int IntTester::TestIntegrator()
 
     integrator1d.SetBounds(2, bounds);
 
-    integrator1d.SetOrder(5);
+    integrator1d.SetOrder(10);
 
     integrator1d.Integrate(m_integrandObj,
                            result,
@@ -151,8 +151,33 @@ int IntTester::TestIntegrator()
 
     std::cout.precision(15);
 
-    std::cout << "The integral of (x^5 + 2*x^3) over (0.5, 0) is: "
+    std::cout << "The integral of (x^10 + 2*x^5) over (0.5, 0) is: "
               << result[0]
+              << " (with "
+              << integrator1d.GetNumFuncEval()
+              << " function evaluations.)"
+              << std::endl;
+
+    NovaIntegrator::AdaptiveIntegrator1D adaptive1d;
+
+    adaptive1d.SetBounds(2, bounds);
+
+    adaptive1d.SetOrder(5);
+
+    adaptive1d.SetErrTol(1e-4);
+
+    adaptive1d.Integrate(m_integrandObj,
+                         result,
+                         1,
+                         NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of (x^10 + 2*x^5) over (0.5, 0) is: "
+              << result[0]
+              << " (with "
+              << adaptive1d.GetNumFuncEval()
+              << " function evaluations.)"
               << std::endl;
 
     bounds[0] = 0.0;

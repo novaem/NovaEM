@@ -81,8 +81,6 @@ namespace NovaIntegrator
 
         virtual void SetOrder(const unsigned order)
         {
-            m_order = order;
-
             m_rule[0] = GaussRule1D::GetInstance(order);
 
             m_rule[1] = GaussRule1D::GetInstance(order);

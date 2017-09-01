@@ -49,6 +49,12 @@ namespace NovaIntegrator
             CleanUp();
         }
 
+        void SetRule(IntegrationRule *rule,
+                     const unsigned ruleNo = 0)
+        {
+            m_rule[ruleNo] = rule;
+        }
+
     };
 }
 

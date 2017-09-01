@@ -63,8 +63,6 @@ namespace NovaIntegrator
 
         virtual void SetOrder(const unsigned order)
         {
-            m_order = order;
-
             m_rule[0] = GaussRule2D_Tri::GetInstance(order);
         }
 

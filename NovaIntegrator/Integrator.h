@@ -16,7 +16,7 @@ namespace NovaIntegrator
 
     protected:
 
-        unsigned m_order;
+//        unsigned m_order;
 
         unsigned m_boundsLength;
 
@@ -71,20 +71,23 @@ namespace NovaIntegrator
 
         void InitializeWorkspace(const unsigned length)
         {
-            if(m_workspaceLength > length)
-
-                return;
-
-            if(m_workspace != NULL)
+            if(m_workspaceLength < length)
             {
-                delete[] m_workspace;
+                if(m_workspace != NULL)
+                {
+                    delete[] m_workspace;
 
-                m_workspace = NULL;
+                    m_workspace = NULL;
+                }
+
+                m_workspace = new double[length];
+
+                m_workspaceLength = length;
             }
 
-            m_workspace = new double[length];
+            for(unsigned i(0); i < m_workspaceLength; ++i)
 
-            m_workspaceLength = length;
+                m_workspace[i] = 0.0;
         }
 
     public:
@@ -118,7 +121,7 @@ namespace NovaIntegrator
         virtual bool IsAdaptiveIntegrator() const = 0;
 
         virtual unsigned Integrate(Integrand *integrand,
-                                   double* integrandVector,
+                                   double *integrandVector,
                                    const unsigned vectorLength,
                                    const unsigned dataType) = 0;
 

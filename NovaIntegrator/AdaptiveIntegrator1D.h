@@ -15,20 +15,30 @@ namespace NovaIntegrator
 
         const static unsigned DIM;
 
+        const static unsigned BOUND_REC_LENGTH;
+
     protected:
 
-        virtual double ComputeJacobian(const double lc[]);
+        virtual unsigned GetBoundRecLength() const;
 
-        virtual void ComputeLocalCoordinate(const double lc[],
-                                            double localCoord[]);
+        virtual unsigned GetSplitDomainNum() const;
 
         virtual void SplitDomain(double *oldDomain,
                                  double *newDomain,
-                                 unsigned splitDirection = 0);
+                                 unsigned splitDirection);
 
     public:
 
-        AdaptiveIntegrator1D();
+        AdaptiveIntegrator1D(const unsigned order = 2);
+
+        virtual ~AdaptiveIntegrator1D();
+
+        virtual NovaMesh::PatchType GetSupportedMeshType() const
+        {
+            return NovaMesh::LINE;
+        }
+
+        virtual void SetOrder(const unsigned order);
 
         // Set number of domains.
         // This function will be used only by singular integrator.
@@ -39,10 +49,6 @@ namespace NovaIntegrator
 
         virtual void SetNumDomain(const unsigned numDomains);
 
-        virtual unsigned Integrate(Integrand *integrand,
-                                   double* integrandVector,
-                                   const unsigned vectorLength,
-                                   const unsigned dataType);
     };
 }
 
