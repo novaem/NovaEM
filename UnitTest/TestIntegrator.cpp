@@ -46,7 +46,7 @@ IntegrandTri(const double localCoord[],
 
     const double &L2 = localCoord[1];
 
-    integrandVector[0] = L1 * L1 * L1 * L2 * L2 +
+    integrandVector[0] = L1 * L1 * L1 * L1 * L1 * L1 * L2 * L2 +
                          2.0 * L2 * L2 * L1;
 
     return;
@@ -195,7 +195,7 @@ int IntTester::TestIntegrator()
 
     integratorTri.SetBounds(6, bounds);
 
-    integratorTri.SetOrder(5);
+    integratorTri.SetOrder(8);
 
     integratorTri.Integrate(m_integrandObj,
                            result,
@@ -206,6 +206,29 @@ int IntTester::TestIntegrator()
 
     std::cout << "The integral of (u^3 * v^2 + 2 * u * v^2) over a triangle is: "
               << result[0]
+              << " (with "
+              << integratorTri.GetNumFuncEval()
+              << " function evaluations.)"
+              << std::endl;
+
+    NovaIntegrator::AdaptiveIntegrator2D_Tri adaptive2d_tri;
+
+    adaptive2d_tri.SetBounds(6, bounds);
+
+    adaptive2d_tri.SetOrder(3);
+
+    adaptive2d_tri.Integrate(m_integrandObj,
+                             result,
+                             1,
+                             NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of (u^3 * v^2 + 2 * u * v^2) over a triangle is: "
+              << result[0]
+              << " (with "
+              << adaptive2d_tri.GetNumFuncEval()
+              << " function evaluations.)"
               << std::endl;
 
     bounds[0] = 0.0;
@@ -226,7 +249,7 @@ int IntTester::TestIntegrator()
 
     integratorQuad.SetBounds(8, bounds);
 
-    integratorQuad.SetOrder(6);
+    integratorQuad.SetOrder(8);
 
     integratorQuad.Integrate(m_integrandObj,
                              result,
