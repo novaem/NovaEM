@@ -10,6 +10,7 @@
 #include "FixedPntIntegrator3D_Hex.h"
 #include "AdaptiveIntegrator1D.h"
 #include "AdaptiveIntegrator2D_Tri.h"
+#include "AdaptiveIntegrator3D_Tet.h"
 
 class IntTester
 {

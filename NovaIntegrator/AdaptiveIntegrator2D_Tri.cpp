@@ -1,4 +1,4 @@
-#include "GaussRule1D.h"
+#include "GaussRule2D_Tri.h"
 #include "FixedPntIntegrator2D_Tri.h"
 #include "AdaptiveIntegrator2D_Tri.h"
 using namespace NovaIntegrator;

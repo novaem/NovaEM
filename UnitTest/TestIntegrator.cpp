@@ -64,9 +64,9 @@ IntegrandTet(const double localCoord[],
 
     const double &L3 = localCoord[2];
 
-    integrandVector[0] = L1 * L1 * L2 * L3 +
-                         2.0 * L1 * L2 * L2 * L3 +
-                         3.0 * L1 * L2 * L3 * L3 ;
+    integrandVector[0] = L1 * L1 * L1 * L1 * L2 * L2 * L2 * L3 * L3 * L3 +
+                         2.0 * L1 * L1 * L1 * L2 * L2 * L2 * L2 * L3 * L3 * L3 +
+                         3.0 * L1 * L1 * L1 * L2 * L2 * L2 * L3 * L3 * L3 * L3;
 
     return;
 }
@@ -285,7 +285,7 @@ int IntTester::TestIntegrator()
 
     integratorTet.SetBounds(12, bounds);
 
-    integratorTet.SetOrder(4);
+    integratorTet.SetOrder(11);
 
     integratorTet.Integrate(m_integrandObj,
                            result,
@@ -294,8 +294,31 @@ int IntTester::TestIntegrator()
 
     std::cout.precision(15);
 
-    std::cout << "The integral of (u^2 * v * w + 2 * u * v^2 * w + 3 * u * v * w^2) over a tet is: "
+    std::cout << "The integral of (u^4 * v^3 * w^3 + 2 * u^3 * v^4 * w^3 + 3 * u^3 * v^3 * w^4) over a tet is: "
               << result[0]
+              << " (with "
+              << integratorTet.GetNumFuncEval()
+              << " function evaluations.)"
+              << std::endl;
+
+    NovaIntegrator::AdaptiveIntegrator3D_Tet adaptive3d_tet;
+
+    adaptive3d_tet.SetBounds(12, bounds);
+
+    adaptive3d_tet.SetOrder(5);
+
+    adaptive3d_tet.Integrate(m_integrandObj,
+                           result,
+                           1,
+                           NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of (u^4 * v^3 * w^3 + 2 * u^3 * v^4 * w^3 + 3 * u^3 * v^3 * w^4) over a tet is: "
+              << result[0]
+              << " (with "
+              << adaptive3d_tet.GetNumFuncEval()
+              << " function evaluations.)"
               << std::endl;
 
     bounds[0] = 0.0;
