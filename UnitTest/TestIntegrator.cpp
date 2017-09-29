@@ -204,7 +204,7 @@ int IntTester::TestIntegrator()
 
     std::cout.precision(15);
 
-    std::cout << "The integral of (u^3 * v^2 + 2 * u * v^2) over a triangle is: "
+    std::cout << "The integral of (u^6 * v^2 + 2 * u * v^2) over a triangle is: "
               << result[0]
               << " (with "
               << integratorTri.GetNumFuncEval()
@@ -224,7 +224,7 @@ int IntTester::TestIntegrator()
 
     std::cout.precision(15);
 
-    std::cout << "The integral of (u^3 * v^2 + 2 * u * v^2) over a triangle is: "
+    std::cout << "The integral of (u^6 * v^2 + 2 * u * v^2) over a triangle is: "
               << result[0]
               << " (with "
               << adaptive2d_tri.GetNumFuncEval()
@@ -258,8 +258,31 @@ int IntTester::TestIntegrator()
 
     std::cout.precision(15);
 
-    std::cout << "The integral of (u^3 * v^2 + 2 * u * v^2) over a triangle is: "
+    std::cout << "The integral of (u^6 * v^2 + 2 * u * v^2) over a triangle is: "
               << result[0]
+              << " (with "
+              << integratorQuad.GetNumFuncEval()
+              << " function evaluations.)"
+              << std::endl;
+
+    NovaIntegrator::AdaptiveIntegrator2D_Quad adaptive2d_quad;
+
+    adaptive2d_quad.SetBounds(8, bounds);
+
+    adaptive2d_quad.SetOrder(3);
+
+    adaptive2d_quad.Integrate(m_integrandObj,
+                              result,
+                              1,
+                              NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of (u^6 * v^2 + 2 * u * v^2) over a triangle is: "
+              << result[0]
+              << " (with "
+              << adaptive2d_quad.GetNumFuncEval()
+              << " function evaluations.)"
               << std::endl;
 
     bounds[0] = 0.0;

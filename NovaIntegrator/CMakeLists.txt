@@ -12,6 +12,7 @@ set(SOURCES IntegrationRule.cpp
             AdaptiveIntegrator.cpp
             AdaptiveIntegrator1D.cpp
             AdaptiveIntegrator2D_Tri.cpp
+            AdaptiveIntegrator2D_Quad.cpp
             AdaptiveIntegrator3D_Tet.cpp)
 
 set(HEADERS IntegrationRule.h
@@ -29,6 +30,7 @@ set(HEADERS IntegrationRule.h
             AdaptiveIntegrator.h
             AdaptiveIntegrator1D.h
             AdaptiveIntegrator2D_Tri.h
+            AdaptiveIntegrator2D_Quad.h
             AdaptiveIntegrator3D_Tet.h)
 
 add_library(NovaIntegrator ${SOURCES} ${HEADERS})
