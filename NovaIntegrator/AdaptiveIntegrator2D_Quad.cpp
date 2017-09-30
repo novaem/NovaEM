@@ -412,8 +412,14 @@ Integrate(Integrand *integrand,
                          globalResult2);
 
         if(failed)
+        {
+            AccumulateVector(resultLength,
+                             globalResult2,
+                             integrandVector);
 
             break;
+        }
+
 
         // Switch the buffers:
 
