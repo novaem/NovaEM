@@ -12,6 +12,7 @@
 #include "AdaptiveIntegrator2D_Tri.h"
 #include "AdaptiveIntegrator2D_Quad.h"
 #include "AdaptiveIntegrator3D_Tet.h"
+#include "AdaptiveIntegrator3D_Hex.h"
 
 class IntTester
 {

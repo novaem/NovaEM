@@ -94,6 +94,8 @@ EstimateError(const unsigned length,
               const double *result2,
               bool &isAbsErr)
 {
+    isAbsErr = false;
+
     double error(0.0);
 
     double absReference(0.0);
@@ -115,8 +117,11 @@ EstimateError(const unsigned length,
                 error += temp / absReference;
 
             else
-
+            {
                 error += temp;
+
+                isAbsErr = true;
+            }
         }
 
         error /= double(length);
@@ -134,6 +139,10 @@ EstimateError(const unsigned length,
             if(absReference > m_absErrorLimit)
 
                 temp /= absReference;
+
+            else
+
+                isAbsErr = true;
 
             if(temp > error)
 
@@ -161,8 +170,11 @@ EstimateError(const unsigned length,
             error = std::sqrt(error / absReference);
 
         else
-
+        {
             error = std::sqrt(error);
+
+            isAbsErr = true;
+        }
 
         break;
 
@@ -245,6 +257,8 @@ Integrate(Integrand *integrand,
     unsigned numSubDomains(0);
 
     double error(0.0);
+
+    bool failed(false);
 
     bool isAbsErr(false);
 
@@ -337,11 +351,18 @@ Integrate(Integrand *integrand,
 
                 // Split current sub domain:
 
-                SplitDomain(currentSubDomain, newSubDomain);
+                if(numNewSubDomains + splitDomainNum > MAX_NUM_SUBDOMAIN)
 
-                newSubDomain += splitDomainNum * boundRecLength;
+                    failed = true;
 
-                numNewSubDomains += splitDomainNum;
+                else
+                {
+                    SplitDomain(currentSubDomain, newSubDomain);
+
+                    newSubDomain += splitDomainNum * boundRecLength;
+
+                    numNewSubDomains += splitDomainNum;
+                }
             }
 
             currentSubDomain += boundRecLength;
@@ -354,6 +375,10 @@ Integrate(Integrand *integrand,
         AccumulateVector(resultLength,
                          integrandVector,
                          globalResult2);
+
+        if(failed)
+
+            break;
 
         // Switch the buffers:
 

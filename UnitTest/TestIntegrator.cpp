@@ -308,7 +308,7 @@ int IntTester::TestIntegrator()
 
     integratorTet.SetBounds(12, bounds);
 
-    integratorTet.SetOrder(11);
+    integratorTet.SetOrder(12);
 
     integratorTet.Integrate(m_integrandObj,
                            result,
@@ -328,7 +328,7 @@ int IntTester::TestIntegrator()
 
     adaptive3d_tet.SetBounds(12, bounds);
 
-    adaptive3d_tet.SetOrder(5);
+    adaptive3d_tet.SetOrder(3);
 
     adaptive3d_tet.Integrate(m_integrandObj,
                            result,
@@ -383,7 +383,7 @@ int IntTester::TestIntegrator()
 
     integratorHex.SetBounds(24, bounds);
 
-    integratorHex.SetOrder(6);
+    integratorHex.SetOrder(12);
 
     integratorHex.Integrate(m_integrandObj,
                            result,
@@ -392,8 +392,31 @@ int IntTester::TestIntegrator()
 
     std::cout.precision(15);
 
-    std::cout << "The integral of (u^2 * v * w + 2 * u * v^2 * w + 3 * u * v * w^2) over a tet is: "
+    std::cout << "The integral of (u^4 * v^3 * w^3 + 2 * u^3 * v^4 * w^3 + 3 * u^3 * v^3 * w^4) over a tet is: "
               << result[0]
+              << " (with "
+              << integratorHex.GetNumFuncEval()
+              << " function evaluations.)"
+              << std::endl;
+
+    NovaIntegrator::AdaptiveIntegrator3D_Hex adaptive3d_hex;
+
+    adaptive3d_hex.SetBounds(24, bounds);
+
+    adaptive3d_hex.SetOrder(3);
+
+    adaptive3d_hex.Integrate(m_integrandObj,
+                             result,
+                             1,
+                             NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of (u^4 * v^3 * w^3 + 2 * u^3 * v^4 * w^3 + 3 * u^3 * v^3 * w^4) over a tet is: "
+              << result[0]
+              << " (with "
+              << adaptive3d_hex.GetNumFuncEval()
+              << " function evaluations.)"
               << std::endl;
 
     return 0;

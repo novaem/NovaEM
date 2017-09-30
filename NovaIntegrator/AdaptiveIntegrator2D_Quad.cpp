@@ -241,6 +241,8 @@ Integrate(Integrand *integrand,
 
     double error0(0.0), error1(0.0);
 
+    bool failed(false);
+
     bool isAbsErr(false);
 
     bool converged(false);
@@ -384,11 +386,18 @@ Integrate(Integrand *integrand,
 
                 // Split current sub domain:
 
-                SplitDomain(currentSubDomain, newSubDomain, splitDir);
+                if(numNewSubDomains + splitDomainNum > MAX_NUM_SUBDOMAIN)
 
-                newSubDomain += splitDomainNum * boundRecLength;
+                    failed = true;
 
-                numNewSubDomains += splitDomainNum;
+                else
+                {
+                    SplitDomain(currentSubDomain, newSubDomain, splitDir);
+
+                    newSubDomain += splitDomainNum * boundRecLength;
+
+                    numNewSubDomains += splitDomainNum;
+                }
             }
 
             currentSubDomain += boundRecLength;
@@ -401,6 +410,10 @@ Integrate(Integrand *integrand,
         AccumulateVector(resultLength,
                          integrandVector,
                          globalResult2);
+
+        if(failed)
+
+            break;
 
         // Switch the buffers:
 
