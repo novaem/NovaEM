@@ -10,6 +10,8 @@ SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS} -O2 -g")
 
 SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2")
 
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
+
 add_subdirectory(NovaDef)
 
 include_directories(SYSTEM "NovaDef")
@@ -46,5 +48,7 @@ target_link_libraries(NovaEM
                       NovaDef
                       NovaType 
                       NovaMesh
-                      NovaBasis)
+                      NovaBasis
+                      -static-libgcc
+                      -static-libstdc++)
 

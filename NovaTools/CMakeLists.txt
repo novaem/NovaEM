@@ -8,5 +8,5 @@ target_link_libraries(NovaTools
                       NovaMesh
                       NovaDef
                       NovaBasis
-                      gmp
-                      gmpxx)
+                      gmpxx
+                      gmp)
