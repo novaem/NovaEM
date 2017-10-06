@@ -14,7 +14,10 @@ set(SOURCES IntegrationRule.cpp
             AdaptiveIntegrator2D_Tri.cpp
             AdaptiveIntegrator2D_Quad.cpp
             AdaptiveIntegrator3D_Tet.cpp
-            AdaptiveIntegrator3D_Hex.cpp)
+            AdaptiveIntegrator3D_Hex.cpp
+            DuffyIntegrator.cpp
+            DuffyIntegrator2D_Tri.cpp
+            DuffyIntegrator2D_Quad.cpp)
 
 set(HEADERS IntegrationRule.h
             GaussRule1D.h
@@ -33,7 +36,10 @@ set(HEADERS IntegrationRule.h
             AdaptiveIntegrator2D_Tri.h
             AdaptiveIntegrator2D_Quad.h
             AdaptiveIntegrator3D_Tet.h
-            AdaptiveIntegrator3D_Hex.h)
+            AdaptiveIntegrator3D_Hex.h
+            DuffyIntegrator.h
+            DuffyIntegrator2D_Tri.h
+            DuffyIntegrator2D_Quad.h)
 
 add_library(NovaIntegrator ${SOURCES} ${HEADERS})
 
