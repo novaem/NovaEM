@@ -4,20 +4,18 @@
 
 #pragma once
 
-#include "DuffyIntegrator.h"
+#include "DuffyIntegrator2D.h"
 
 namespace NovaIntegrator
 {
 
-    class DuffyIntegrator2D_Tri : public DuffyIntegrator
+    class DuffyIntegrator2D_Tri : public DuffyIntegrator2D
     {
     public:
 
         const static unsigned NUM_VERTEX;
 
         const static unsigned DIM;
-
-        const static unsigned BOUND_REC_LENGTH;
 
         const static unsigned NUM_DOMAIN;
 

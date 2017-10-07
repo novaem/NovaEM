@@ -30,6 +30,38 @@ AdaptiveIntegrator3D_Hex(const unsigned order) : AdaptiveIntegrator()
     unsigned length = BOUND_REC_LENGTH;
 
     InitializeBoundSpace(length);
+
+    m_bounds[0] = 0.0;
+    m_bounds[1] = 0.0;
+    m_bounds[2] = 0.0;
+
+    m_bounds[3] = 1.0;
+    m_bounds[4] = 0.0;
+    m_bounds[5] = 0.0;
+
+    m_bounds[6] = 1.0;
+    m_bounds[7] = 1.0;
+    m_bounds[8] = 0.0;
+
+    m_bounds[9] = 0.0;
+    m_bounds[10] = 1.0;
+    m_bounds[11] = 0.0;
+
+    m_bounds[12] = 0.0;
+    m_bounds[13] = 0.0;
+    m_bounds[14] = 1.0;
+
+    m_bounds[15] = 1.0;
+    m_bounds[16] = 0.0;
+    m_bounds[17] = 1.0;
+
+    m_bounds[18] = 1.0;
+    m_bounds[19] = 1.0;
+    m_bounds[20] = 1.0;
+
+    m_bounds[21] = 0.0;
+    m_bounds[22] = 1.0;
+    m_bounds[23] = 1.0;
 }
 
 AdaptiveIntegrator3D_Hex::~AdaptiveIntegrator3D_Hex()

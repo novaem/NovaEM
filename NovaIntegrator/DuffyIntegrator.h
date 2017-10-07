@@ -69,6 +69,11 @@ namespace NovaIntegrator
             return true;
         }
 
+        virtual void SetOrder(const unsigned order)
+        {
+            m_integrator->SetOrder(order);
+        }
+
         virtual void SetSingularPnt(const double *pnt)
         {
             m_singularPnt[0] = pnt[0];

@@ -30,6 +30,22 @@ AdaptiveIntegrator3D_Tet(const unsigned order) : AdaptiveIntegrator()
     unsigned length = BOUND_REC_LENGTH;
 
     InitializeBoundSpace(length);
+
+    m_bounds[0] = 0.0;
+    m_bounds[1] = 0.0;
+    m_bounds[2] = 0.0;
+
+    m_bounds[3] = 1.0;
+    m_bounds[4] = 0.0;
+    m_bounds[5] = 0.0;
+
+    m_bounds[6] = 0.0;
+    m_bounds[7] = 1.0;
+    m_bounds[8] = 0.0;
+
+    m_bounds[9] = 0.0;
+    m_bounds[10] = 0.0;
+    m_bounds[11] = 1.0;
 }
 
 AdaptiveIntegrator3D_Tet::~AdaptiveIntegrator3D_Tet()

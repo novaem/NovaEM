@@ -6,6 +6,10 @@
 
 using namespace NovaIntegrator;
 
+const double SL1 = 0.2;
+
+const double SL2 = 0.7;
+
 IntTester::IntTester():
     m_integrandObj(NULL)
 {
@@ -67,6 +71,23 @@ IntegrandTet(const double localCoord[],
     integrandVector[0] = L1 * L1 * L1 * L1 * L2 * L2 * L2 * L3 * L3 * L3 +
                          2.0 * L1 * L1 * L1 * L2 * L2 * L2 * L2 * L3 * L3 * L3 +
                          3.0 * L1 * L1 * L1 * L2 * L2 * L2 * L3 * L3 * L3 * L3;
+
+    return;
+}
+
+void IntTester::
+SingularIntegrand2D(const double localCoord[],
+                    double *integrandVector,
+                    const unsigned vectorLength,
+                    const unsigned dataType)
+{
+    const double &L1 = localCoord[0];
+
+    const double &L2 = localCoord[1];
+
+    integrandVector[0] = 1.0 /
+                         std::sqrt( (L1 - SL1) * (L1 - SL1) +
+                                    (L2 - SL2) * (L2 - SL2));
 
     return;
 }
@@ -403,7 +424,7 @@ int IntTester::TestIntegrator()
 
     adaptive3d_hex.SetBounds(24, bounds);
 
-    adaptive3d_hex.SetOrder(3);
+    adaptive3d_hex.SetOrder(11);
 
     adaptive3d_hex.Integrate(m_integrandObj,
                              result,
@@ -416,6 +437,50 @@ int IntTester::TestIntegrator()
               << result[0]
               << " (with "
               << adaptive3d_hex.GetNumFuncEval()
+              << " function evaluations.)"
+              << std::endl;
+
+    m_integrandObj->ResetFunction(&IntTester::SingularIntegrand2D);
+
+    double singularPnt[3] = {SL1, SL2, 0.0};
+
+    NovaIntegrator::DuffyIntegrator2D_Tri duffy2d_tri;
+
+    duffy2d_tri.SetSingularPnt(singularPnt);
+
+    duffy2d_tri.SetOrder(3);
+
+    duffy2d_tri.Integrate(m_integrandObj,
+                          result,
+                          1,
+                          NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of 1.0 / sqrt( (L1 - SL1)^2 + (L2 - SL2)^2 ) over a triangle is: "
+              << result[0]
+              << " (with "
+              << duffy2d_tri.GetNumFuncEval()
+              << " function evaluations.)"
+              << std::endl;
+
+    NovaIntegrator::DuffyIntegrator2D_Quad duffy2d_quad;
+
+    duffy2d_quad.SetSingularPnt(singularPnt);
+
+    duffy2d_quad.SetOrder(3);
+
+    duffy2d_quad.Integrate(m_integrandObj,
+                           result,
+                           1,
+                           NovaDef::REAL_DATA_TYPE);
+
+    std::cout.precision(15);
+
+    std::cout << "The integral of 1.0 / sqrt( (L1 - SL1)^2 + (L2 - SL2)^2 ) over a quadrangle is: "
+              << result[0]
+              << " (with "
+              << duffy2d_quad.GetNumFuncEval()
               << " function evaluations.)"
               << std::endl;
 

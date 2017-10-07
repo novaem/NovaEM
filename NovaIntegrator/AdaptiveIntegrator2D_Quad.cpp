@@ -28,9 +28,19 @@ AdaptiveIntegrator2D_Quad(const unsigned order) : AdaptiveIntegrator()
 
     m_numDomains = 1;
 
-    unsigned length = BOUND_REC_LENGTH;
+    InitializeBoundSpace(BOUND_REC_LENGTH);
 
-    InitializeBoundSpace(length);
+    m_bounds[0] = 0.0;
+    m_bounds[1] = 0.0;
+
+    m_bounds[2] = 1.0;
+    m_bounds[3] = 0.0;
+
+    m_bounds[4] = 1.0;
+    m_bounds[5] = 1.0;
+
+    m_bounds[6] = 0.0;
+    m_bounds[7] = 1.0;
 }
 
 AdaptiveIntegrator2D_Quad::~AdaptiveIntegrator2D_Quad()

@@ -22,5 +22,7 @@ Integrate(Integrand *integrand,
                             vectorLength,
                             dataType);
 
+    m_numFuncEval = m_integrator->GetNumFuncEval();
+
     return 0;
 }

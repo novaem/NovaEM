@@ -30,6 +30,15 @@ AdaptiveIntegrator2D_Tri(const unsigned order) : AdaptiveIntegrator()
     unsigned length = BOUND_REC_LENGTH;
 
     InitializeBoundSpace(length);
+
+    m_bounds[0] = 0.0;
+    m_bounds[1] = 0.0;
+
+    m_bounds[2] = 1.0;
+    m_bounds[3] = 0.0;
+
+    m_bounds[4] = 0.0;
+    m_bounds[5] = 1.0;
 }
 
 AdaptiveIntegrator2D_Tri::~AdaptiveIntegrator2D_Tri()

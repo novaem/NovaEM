@@ -166,9 +166,9 @@ namespace NovaIntegrator
                                    const unsigned vectorLength,
                                    const unsigned dataType);
 
-//        // Set number of domains:
+        // Set number of domains:
 
-//        virtual void SetNumDomain(const unsigned numDomains) = 0;
+        virtual void SetNumDomain(const unsigned numDomains) = 0;
 
     };
 }

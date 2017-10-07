@@ -13,6 +13,8 @@
 #include "AdaptiveIntegrator2D_Quad.h"
 #include "AdaptiveIntegrator3D_Tet.h"
 #include "AdaptiveIntegrator3D_Hex.h"
+#include "DuffyIntegrator2D_Tri.h"
+#include "DuffyIntegrator2D_Quad.h"
 
 class IntTester
 {
@@ -44,6 +46,11 @@ public:
                       double *integrandVector,
                       const unsigned vectorLength,
                       const unsigned dataType);
+
+    void SingularIntegrand2D(const double localCoord[],
+                             double *integrandVector,
+                             const unsigned vectorLength,
+                             const unsigned dataType);
 
     int TestRule();
 

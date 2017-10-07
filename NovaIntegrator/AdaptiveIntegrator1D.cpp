@@ -29,6 +29,10 @@ AdaptiveIntegrator1D(const unsigned order) : AdaptiveIntegrator()
     unsigned length = NUM_VERTEX;
 
     InitializeBoundSpace(length);
+
+    m_bounds[0] = 0.0;
+
+    m_bounds[1] = 1.0;
 }
 
 AdaptiveIntegrator1D::~AdaptiveIntegrator1D()
