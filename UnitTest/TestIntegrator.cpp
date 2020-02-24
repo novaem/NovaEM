@@ -11,18 +11,18 @@ const double SL1 = 0.2;
 const double SL2 = 0.7;
 
 IntTester::IntTester():
-    m_integrandObj(NULL)
+    m_integrandObj(nullptr)
 {
-    m_integrandObj = new TestIntegrand(this, NULL);
+    m_integrandObj = new TestIntegrand(this, nullptr);
 }
 
 IntTester::~IntTester()
 {
-    if(m_integrandObj != NULL)
+    if(m_integrandObj != nullptr)
     {
         delete m_integrandObj;
 
-        m_integrandObj = NULL;
+        m_integrandObj = nullptr;
     }
 }
 
@@ -94,13 +94,13 @@ SingularIntegrand2D(const double localCoord[],
 
 int IntTester::TestRule()
 {
-    IntegrationRule *rule(NULL);
+    IntegrationRule *rule(nullptr);
 
     rule = GaussRule3D_Tet::GetInstance(15);
 
     unsigned dim = rule->GetDimension();
 
-    const double *a(NULL), *w(NULL);
+    const double *a(nullptr), *w(nullptr);
 
     unsigned num = rule->GetRule(a, w);
 
