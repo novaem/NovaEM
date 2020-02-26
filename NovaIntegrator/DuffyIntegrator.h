@@ -83,7 +83,7 @@ namespace NovaIntegrator
             m_singularPnt[2] = pnt[2];
         }
 
-        virtual unsigned Integrate(Integrand *integrand,
+        virtual unsigned Integrate(Integrand &integrand,
                                    double *integrandVector,
                                    const unsigned vectorLength,
                                    const unsigned dataType);

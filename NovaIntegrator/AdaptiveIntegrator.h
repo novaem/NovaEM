@@ -161,7 +161,7 @@ namespace NovaIntegrator
             return true;
         }
 
-        virtual unsigned Integrate(Integrand *integrand,
+        virtual unsigned Integrate(Integrand &integrand,
                                    double *integrandVector,
                                    const unsigned vectorLength,
                                    const unsigned dataType);

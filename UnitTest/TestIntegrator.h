@@ -20,11 +20,11 @@ class IntTester
 {
 private:
 
-    typedef NovaIntegrator::IntegrandTemplate<IntTester> TestIntegrand;
+//    typedef NovaIntegrator::IntegrandTemplate<IntTester> TestIntegrand;
 
 protected:
 
-    TestIntegrand *m_integrandObj;
+//    TestIntegrand &m_integrandObj;
 
 public:
 

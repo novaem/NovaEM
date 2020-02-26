@@ -30,7 +30,7 @@ FixedPntIntegrator2D_Quad(const unsigned order)
 }
 
 unsigned NovaIntegrator::FixedPntIntegrator2D_Quad::
-Integrate(Integrand *integrand,
+Integrate(Integrand &integrand,
           double* integrandVector,
           const unsigned vectorLength,
           const unsigned dataType)
@@ -73,10 +73,10 @@ Integrate(Integrand *integrand,
 
             ComputeLocalCoordinate(lc, localCoord);
 
-            (*integrand)(localCoord,
-                         m_workspace,
-                         vectorLength,
-                         dataType);
+            integrand(localCoord,
+                      m_workspace,
+                      vectorLength,
+                      dataType);
 
             for(unsigned k(0); k < length; ++k)
 

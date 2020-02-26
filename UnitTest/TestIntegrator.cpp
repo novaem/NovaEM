@@ -10,20 +10,23 @@ const double SL1 = 0.2;
 
 const double SL2 = 0.7;
 
-IntTester::IntTester():
-    m_integrandObj(nullptr)
-{
-    m_integrandObj = new TestIntegrand(this, nullptr);
-}
+IntTester::IntTester()
+{}
+
+//IntTester::IntTester():
+//    m_integrandObj(nullptr)
+//{
+//    m_integrandObj = new TestIntegrand(this, nullptr);
+//}
 
 IntTester::~IntTester()
 {
-    if(m_integrandObj != nullptr)
-    {
-        delete m_integrandObj;
+//    if(m_integrandObj != nullptr)
+//    {
+//        delete m_integrandObj;
 
-        m_integrandObj = nullptr;
-    }
+//        m_integrandObj = nullptr;
+//    }
 }
 
 void IntTester::
@@ -157,7 +160,20 @@ int IntTester::TestIntegrator()
 
     bounds[1] = 0.0;
 
-    m_integrandObj->ResetFunction(&IntTester::Integrand1D);
+//    m_integrandObj->ResetFunction(&IntTester::Integrand1D);
+
+    NovaIntegrator::Integrand
+    m_integrandObj =
+    [this](const double localCoord[],
+           double* integrandVector,
+           const unsigned vectorLength,
+           const unsigned dataType)
+           {
+                Integrand1D(localCoord,
+                            integrandVector,
+                            vectorLength,
+                            dataType);
+           };
 
     NovaIntegrator::FixedPntIntegrator1D integrator1d;
 
@@ -210,7 +226,19 @@ int IntTester::TestIntegrator()
     bounds[4] = 0.0;
     bounds[5] = 0.7;
 
-    m_integrandObj->ResetFunction(&IntTester::IntegrandTri);
+//    m_integrandObj->ResetFunction(&IntTester::IntegrandTri);
+
+    m_integrandObj =
+    [this](const double localCoord[],
+           double* integrandVector,
+           const unsigned vectorLength,
+           const unsigned dataType)
+           {
+                IntegrandTri(localCoord,
+                             integrandVector,
+                             vectorLength,
+                             dataType);
+           };
 
     NovaIntegrator::FixedPntIntegrator2D_Tri integratorTri;
 
@@ -264,7 +292,19 @@ int IntTester::TestIntegrator()
     bounds[6] = 0.0;
     bounds[7] = 0.0;
 
-    m_integrandObj->ResetFunction(&IntTester::IntegrandTri);
+//    m_integrandObj->ResetFunction(&IntTester::IntegrandTri);
+
+    m_integrandObj =
+    [this](const double localCoord[],
+           double* integrandVector,
+           const unsigned vectorLength,
+           const unsigned dataType)
+           {
+                IntegrandTri(localCoord,
+                             integrandVector,
+                             vectorLength,
+                             dataType);
+           };
 
     NovaIntegrator::FixedPntIntegrator2D_Quad integratorQuad;
 
@@ -323,7 +363,19 @@ int IntTester::TestIntegrator()
     bounds[11] = 1.3;
 
 
-    m_integrandObj->ResetFunction(&IntTester::IntegrandTet);
+//    m_integrandObj->ResetFunction(&IntTester::IntegrandTet);
+
+    m_integrandObj =
+    [this](const double localCoord[],
+           double* integrandVector,
+           const unsigned vectorLength,
+           const unsigned dataType)
+           {
+                IntegrandTet(localCoord,
+                             integrandVector,
+                             vectorLength,
+                             dataType);
+           };
 
     NovaIntegrator::FixedPntIntegrator3D_Tet integratorTet;
 
@@ -349,7 +401,7 @@ int IntTester::TestIntegrator()
 
     adaptive3d_tet.SetBounds(12, bounds);
 
-    adaptive3d_tet.SetOrder(3);
+    adaptive3d_tet.SetOrder(5);
 
     adaptive3d_tet.Integrate(m_integrandObj,
                            result,
@@ -398,7 +450,19 @@ int IntTester::TestIntegrator()
     bounds[23] = 0.0;
 
 
-    m_integrandObj->ResetFunction(&IntTester::IntegrandTet);
+//    m_integrandObj->ResetFunction(&IntTester::IntegrandTet);
+
+    m_integrandObj=
+    [this](const double localCoord[],
+           double* integrandVector,
+           const unsigned vectorLength,
+           const unsigned dataType)
+           {
+                IntegrandTet(localCoord,
+                             integrandVector,
+                             vectorLength,
+                             dataType);
+           };
 
     NovaIntegrator::FixedPntIntegrator3D_Hex integratorHex;
 
@@ -440,7 +504,20 @@ int IntTester::TestIntegrator()
               << " function evaluations.)"
               << std::endl;
 
-    m_integrandObj->ResetFunction(&IntTester::SingularIntegrand2D);
+//    m_integrandObj->ResetFunction(&IntTester::SingularIntegrand2D);
+
+    m_integrandObj=
+    [this] (const double localCoord[],
+            double* integrandVector,
+            const unsigned vectorLength,
+            const unsigned dataType)
+            {
+                SingularIntegrand2D
+                    (localCoord,
+                     integrandVector,
+                     vectorLength,
+                     dataType);
+            };
 
     double singularPnt[3] = {SL1, SL2, 0.0};
 

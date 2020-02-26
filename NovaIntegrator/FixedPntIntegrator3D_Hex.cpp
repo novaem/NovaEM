@@ -52,7 +52,7 @@ FixedPntIntegrator3D_Hex(const unsigned order)
 }
 
 unsigned NovaIntegrator::FixedPntIntegrator3D_Hex::
-Integrate(Integrand *integrand,
+Integrate(Integrand &integrand,
           double* integrandVector,
           const unsigned vectorLength,
           const unsigned dataType)
@@ -106,10 +106,10 @@ Integrate(Integrand *integrand,
 
                 ComputeLocalCoordinate(lc, localCoord);
 
-                (*integrand)(localCoord,
-                             m_workspace,
-                             vectorLength,
-                             dataType);
+                integrand(localCoord,
+                          m_workspace,
+                          vectorLength,
+                          dataType);
 
                 for(unsigned m(0); m < length; ++m)
 

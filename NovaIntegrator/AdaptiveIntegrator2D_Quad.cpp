@@ -172,7 +172,7 @@ SplitDomain(double *oldDomain,
 }
 
 unsigned NovaIntegrator::AdaptiveIntegrator2D_Quad::
-Integrate(Integrand *integrand,
+Integrate(Integrand &integrand,
           double *integrandVector,
           const unsigned vectorLength,
           const unsigned dataType)

@@ -187,7 +187,7 @@ EstimateError(const unsigned length,
 }
 
 unsigned NovaIntegrator::AdaptiveIntegrator::
-Integrate(Integrand *integrand,
+Integrate(Integrand &integrand,
           double *integrandVector,
           const unsigned vectorLength,
           const unsigned dataType)

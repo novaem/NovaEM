@@ -423,7 +423,7 @@ SplitDomain(double *oldDomain,
 }
 
 unsigned NovaIntegrator::AdaptiveIntegrator3D_Hex::
-Integrate(Integrand *integrand,
+Integrate(Integrand &integrand,
           double *integrandVector,
           const unsigned vectorLength,
           const unsigned dataType)

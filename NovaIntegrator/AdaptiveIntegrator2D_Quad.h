@@ -49,7 +49,7 @@ namespace NovaIntegrator
 
         virtual void SetNumDomain(const unsigned numDomains);
 
-        virtual unsigned Integrate(Integrand *integrand,
+        virtual unsigned Integrate(Integrand &integrand,
                                    double *integrandVector,
                                    const unsigned vectorLength,
                                    const unsigned dataType);

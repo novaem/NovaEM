@@ -3,10 +3,12 @@
 
 #pragma once
 
+#include <functional>
 #include "NovaDef.h"
 
 namespace NovaIntegrator
 {
+/*
   class Integrand
   {
   public:
@@ -91,5 +93,16 @@ namespace NovaIntegrator
                                        dataType);
      }
   };
+  */
+
+    typedef
+    std::function
+    <void(const double localCoord[],
+          double* integrandVector,
+          const unsigned vectorLength,
+          const unsigned dataType)
+    > Integrand;
+
+
 }
 #endif // INTEGRAND_H
