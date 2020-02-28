@@ -39,7 +39,7 @@ set(HEADERS IntegrationRule.h
             AdaptiveIntegrator3D_Tet.h
             AdaptiveIntegrator3D_Hex.h
             DuffyIntegrator.h
-            DuffyIntegrator2D.cpp
+            DuffyIntegrator2D.h
             DuffyIntegrator2D_Tri.h
             DuffyIntegrator2D_Quad.h)
 

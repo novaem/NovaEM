@@ -32,18 +32,18 @@ namespace NovaMesh
 
         Patch():
             m_ID(0),
-            m_nodes(NULL)
+            m_nodes(nullptr)
         {}
 
         // Destructor:
 
         virtual ~Patch()
         {
-            if(m_nodes != NULL)
+            if(m_nodes != nullptr)
             {
                 delete[] m_nodes;
 
-                m_nodes = NULL;
+                m_nodes = nullptr;
             }
         }
 

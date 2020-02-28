@@ -40,13 +40,10 @@ add_subdirectory(UnitTest)
 
 add_executable(NovaEM main.cpp)
 
-include_directories(SYSTEM "$HOME/tools/include")
-
-link_directories(SYSTEM "$HOME/tools/lib")
-
-target_link_libraries(NovaEM 
+target_link_libraries(NovaEM
                       NovaDef
-                      NovaType 
+                      NovaType
                       NovaMesh
-                      NovaBasis)
+                      NovaBasis
+                      NovaIntegrator)
 
